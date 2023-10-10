@@ -7,6 +7,8 @@ import DefaultLayout from "./components/DefaultLayout.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
 import Dashboard from "./views/Dashboard.jsx";
 import UserForm from "./views/UserForm.jsx";
+import ForgotPassword from "./views/ForgotPassword.jsx";
+import ResetPassword from "./views/ResetPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,15 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup/>
-      }
+      },
+      {
+        path: '/forgot',
+        element: <ForgotPassword/>
+      },
+      {
+        path: '/reset/:token/:email',
+        element: <ResetPassword/>
+      },
     ]
   },
   {

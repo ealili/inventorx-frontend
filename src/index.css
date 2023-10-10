@@ -30,6 +30,7 @@ input {
     box-sizing: border-box;
     font-size: 14px;
     transition: all 0.3s;
+    border-radius: 10px;
 }
 
 input:focus {
@@ -51,6 +52,7 @@ input:focus {
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .btn-block {
@@ -148,13 +150,14 @@ table > tbody > tr > td {
 }
 
 .login-signup-form .form {
-    width: 360px;
+    width: 450px;
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    max-width: 360px;
-    padding: 34px;
+    max-width: 450px;
+    padding: 50px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .login-signup-form .title {

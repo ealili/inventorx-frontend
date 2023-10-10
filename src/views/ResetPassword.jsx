@@ -1,31 +1,35 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useRef, useState} from "react";
-import axiosClient from "../axios-client.js";
+import axios from "axios";
 import {useStateConetxt} from "../contexts/ContextProvider.jsx";
 
-export default function Login() {
-  const {setUser, setToken} = useStateConetxt()
+export default function ResetPassword() {
 
+  const {token, email} = useParams()
 
-  const emailRef = useRef()
   const passwordRef = useRef()
-
+  const passwordConfirmRef = useRef()
   const [errors, setErrors] = useState(null)
 
+  const {setNotification} = useStateConetxt()
+
+  const navigate = useNavigate()
   const onSubmit = (e) => {
     e.preventDefault()
 
     const payload = {
-      email: emailRef.current.value,
+      token: token,
+      email: atob(email),
       password: passwordRef.current.value,
+      password_confirmation: passwordConfirmRef.current.value,
     }
 
     setErrors(null)
 
-    axiosClient.post('/login', payload)
+    axios.post('http://localhost:8000/api/password/reset', payload)
       .then(({data}) => {
-        setUser(data.user)
-        setToken(data.token)
+        setNotification('Password reset successfully')
+        navigate('/login')
       })
       .catch(err => {
         const response = err.response
@@ -36,7 +40,6 @@ export default function Login() {
             setErrors({
               email: [response.data.message]
             })
-
           }
         }
       })
@@ -45,22 +48,18 @@ export default function Login() {
     <div className="login-signup-form animated fadeInDown">
       <div className="form">
         <form onSubmit={onSubmit}>
-          <h1 className={'title'}>Login into your account</h1>
+          <h1 className={'title'}>Reset your password</h1>
           {errors && <div className={'alert'}>
             {Object.keys(errors).map(key => (
               <p key={key}>{errors[key][0]}</p>
             ))}
           </div>}
-          <input ref={emailRef} type="email" placeholder={'Email'}/>
           <input ref={passwordRef} type="password" placeholder={'Password'}/>
-          <button className="btn btn-block" type={'submit'}>Log in</button>
-          <p className="message">
-            Don't have an account? <Link to={'/signup'}>Register</Link>
-          </p>
-
-          <p className="message">
-            <Link to={'/forgot'}>Forgot your password?</Link>
-          </p>
+          <input ref={passwordConfirmRef} type="password" placeholder={'Password confirmation'}/>
+          <button className="btn btn-block" type={'Update Password'}>Reset</button>
+          {/*<p className="message">*/}
+          {/*  Not Registered? <Link to={'/signup'}>Register</Link>*/}
+          {/*</p>*/}
         </form>
       </div>
     </div>
