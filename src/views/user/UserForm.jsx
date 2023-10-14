@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
-import axiosClient from "../axios-client.js";
+import axiosClient from "../../axios-client.js";
 import {useEffect, useState} from "react";
-import {useStateConetxt} from "../contexts/ContextProvider.jsx";
+import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 
 export default function UserForm() {
   const navigate = useNavigate()
@@ -63,8 +63,8 @@ export default function UserForm() {
 
   return (
     <>
-      {user.id && <h1>Update User: {user.name}</h1>}
-      {!user.id && <h1>New User</h1>}
+      {user.id && <h2>Update User: <b>{user.name} ({user.email})</b></h2>}
+      {!user.id && <h2>Create User</h2>}
       <div className={'card animated fadeInDown'}>
         {loading && (
           <div className="text-center">Loading...</div>

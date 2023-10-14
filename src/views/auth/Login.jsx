@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {useRef, useState} from "react";
-import axiosClient from "../axios-client.js";
-import {useStateConetxt} from "../contexts/ContextProvider.jsx";
+import axiosClient from "../../axios-client.js";
+import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 
 export default function Login() {
   const {setUser, setToken} = useStateConetxt()

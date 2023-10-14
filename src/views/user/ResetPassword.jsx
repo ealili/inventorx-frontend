@@ -1,7 +1,7 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useRef, useState} from "react";
 import axios from "axios";
-import {useStateConetxt} from "../contexts/ContextProvider.jsx";
+import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 
 export default function ResetPassword() {
 

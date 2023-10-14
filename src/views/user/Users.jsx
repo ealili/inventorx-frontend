@@ -1,32 +1,46 @@
 import {useEffect, useState} from "react";
-import axiosClient from "../axios-client.js";
-import {Link} from "react-router-dom";
-import {useStateConetxt} from "../contexts/ContextProvider.jsx";
+import axiosClient, {request} from "../../axios-client.js";
+import {Link, useNavigate} from "react-router-dom";
+import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
+import {getUsers} from "../../services/UserService.js";
 
 export default function Users() {
   const {setNotification} = useStateConetxt()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
+  const {user} = useStateConetxt()
+  const navigate = useNavigate()
 
 
   useEffect(() => {
-    getUsers()
+    fetchUsers()
   }, [])
 
-  const getUsers = () => {
+  const fetchUsers = async () => {
     setLoading(true)
-    axiosClient.get('/users')
-      .then(({data}) => {
-        console.log(data)
-        setLoading(false)
+    try {
+      const users = await getUsers();
+      setUsers(users);
+    } catch (err) {
+      console.log(err.message)
+    }
+    setLoading(false)
 
-        setUsers(data.data)
-      })
-      .catch(err => {
-        console.log(err)
-        setLoading(false)
-      })
   }
+
+  //
+  // axiosClient.get('/users')
+  //   .then(({data}) => {
+  //     console.log(data)
+  //     setLoading(false)
+  //
+  //     setUsers(data.data)
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //     setLoading(false)
+  //   })
+// }
 
   const onDelete = (user) => {
 
@@ -89,5 +103,5 @@ export default function Users() {
         </table>
       </div>
     </div>
-  )
+  );
 }

@@ -244,3 +244,14 @@ table > tbody > tr > td {
         transform: translateY(0);
     }
 }
+
+#greeting {
+    display: flex;
+    align-items: center;
+}
+
+.v-aligned-image {
+    vertical-align: middle;
+    margin-left: 10px; /* Adjust the space between text and image as needed */
+    border-radius: 50%; /* Makes the image round */
+}

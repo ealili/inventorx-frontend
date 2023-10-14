@@ -1,14 +1,17 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
-import Login from "./views/Login.jsx";
-import Signup from "./views/Signup.jsx";
-import Users from "./views/Users.jsx";
+import Login from "./views/auth/Login.jsx";
+import Signup from "./views/auth/Signup.jsx";
+import Users from "./views/user/Users.jsx";
 import NotFound from "./views/NotFound.jsx";
 import DefaultLayout from "./components/DefaultLayout.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
 import Dashboard from "./views/Dashboard.jsx";
-import UserForm from "./views/UserForm.jsx";
-import ForgotPassword from "./views/ForgotPassword.jsx";
-import ResetPassword from "./views/ResetPassword.jsx";
+import UserForm from "./views/user/UserForm.jsx";
+import ForgotPassword from "./views/auth/ForgotPassword.jsx";
+import ResetPassword from "./views/user/ResetPassword.jsx";
+import Profile from "./views/user/Profile.jsx";
+import Clients from "./views/client/Clients.jsx";
+import Projects from "./views/project/Projects.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,10 @@ const router = createBrowserRouter([
         element: <Dashboard/>
       },
       {
+        path: '/profile/:id',
+        element: <Profile/>
+      },
+      {
         path: '/users',
         element: <Users/>
       },
@@ -35,7 +42,15 @@ const router = createBrowserRouter([
       {
         path: '/users/:id',
         element: <UserForm key={'userUpdate'}/>
-      }
+      },
+      {
+        path: '/clients',
+        element: <Clients/>
+      },
+      {
+        path: '/projects',
+        element: <Projects/>
+      },
     ]
   },
   {

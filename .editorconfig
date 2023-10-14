@@ -1,3 +1,5 @@
 [*.{js,jsx, css}]
 indent_size = 2
 
+[*.{js,jsx,css}]
+max_line_length = 99

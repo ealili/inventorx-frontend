@@ -25,3 +25,34 @@ axiosClient.interceptors.response.use((response) => {
 })
 
 export default axiosClient
+
+
+export const request = async (method, url, params = {}) => {
+  const token = localStorage.getItem('access_token')
+  try {
+    const options = {
+      method: method,
+      url: `${import.meta.env.VITE_API_BASE_URL}/api/${url}`,
+      data: params,
+      headers: {
+        "Accept": "application/json", "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const response = await axios(options);
+
+    if (response.data !== undefined && response.data !== null) {
+      if (response.data.data !== undefined && response.data.data !== null) {
+        return response.data.data;
+      } else {
+        return response.data;
+      }
+    } else {
+      return response;
+    }
+
+  } catch (error) {
+    throw error;
+  }
+}

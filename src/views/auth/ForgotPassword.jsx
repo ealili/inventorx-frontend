@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {useRef, useState} from "react";
-import axiosClient from "../axios-client.js";
+import axiosClient from "../../axios-client.js";
 import axios from "axios";
-import {useStateConetxt} from "../contexts/ContextProvider.jsx";
+import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 
 export default function ForgotPassword() {
   const emailRef = useRef()

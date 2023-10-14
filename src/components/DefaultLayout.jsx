@@ -1,16 +1,20 @@
 import {Link, Navigate, Outlet} from "react-router-dom";
 import axiosClient from "../axios-client.js";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useStateConetxt} from "../contexts/ContextProvider.jsx";
 
 export default function DefaultLayout() {
   const {user, token, setUser, setToken, notification} = useStateConetxt()
+  const [loading, setLoading] = useState(false)
 
 
   useEffect(() => {
+    setLoading(true)
     axiosClient.get('/user')
       .then(({data}) => {
-        setUser(data)
+        setUser(data.data)
+        setLoading(false)
+        console.log(data)
       })
 
 
@@ -33,14 +37,28 @@ export default function DefaultLayout() {
 
   return (
     <div id={'defaultLayout'}>
-      <aside>
+      {!loading && <aside>
         <Link to={'/dashboard'}>Dashboard</Link>
-        <Link to={'/users'}>Users</Link>
+        {user.role?.name === 'Admin' ? (<>
+              <Link to={'/users'}>Users</Link>
+              <Link to={'/clients'}>Clients</Link>
+              <Link to={'/projects'}>Projects</Link>
+            </>
+          )
+          : ''}
+        <Link to={`/profile/${user.id}`}>Profile</Link>
       </aside>
+      }
       <div className="content">
         <header>
           <div>
-            <h2>Hi {user.name}</h2>
+            <h2 id={'greeting'}>
+              <img className="v-aligned-image" height={'45px'} width={'45px'} src={user.avatar}
+                   alt={'User'}/>
+              &nbsp;
+              &nbsp;
+              {user.name}
+            </h2>
           </div>
           <div>
             <a href="#" onClick={onLogout} className={'btn-logout'}>Log out</a></div>
