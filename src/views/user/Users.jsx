@@ -1,107 +1,89 @@
 import {useEffect, useState} from "react";
-import axiosClient, {request} from "../../axios-client.js";
-import {Link, useNavigate} from "react-router-dom";
+import axiosClient from "../../axios-client.js";
+import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import {getUsers} from "../../services/UserService.js";
 
 export default function Users() {
-  const {setNotification} = useStateConetxt()
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(false)
-  const {user} = useStateConetxt()
-  const navigate = useNavigate()
+    const {setNotification} = useStateConetxt()
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
+    const fetchUsers = async () => {
+        setLoading(true)
+        try {
+            const users = await getUsers();
+            setUsers(users);
+        } catch (err) { /* empty */
+        }
+        setLoading(false)
 
-  const fetchUsers = async () => {
-    setLoading(true)
-    try {
-      const users = await getUsers();
-      setUsers(users);
-    } catch (err) {
-      console.log(err.message)
-    }
-    setLoading(false)
-
-  }
-
-  //
-  // axiosClient.get('/users')
-  //   .then(({data}) => {
-  //     console.log(data)
-  //     setLoading(false)
-  //
-  //     setUsers(data.data)
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     setLoading(false)
-  //   })
-// }
-
-  const onDelete = (user) => {
-
-    if (!window.confirm('Are you sure you want to delete this user?')) {
-      return
     }
 
-    console.log(user.id)
+    const onDelete = (user) => {
 
-    axiosClient.delete(`/users/${user.id}`)
-      .then(() => {
-        setNotification('User was deleted successfully')
-        // Update Users, fetch again
-        getUsers();
-      })
-  }
+        if (!window.confirm('Are you sure you want to delete this user?')) {
+            return
+        }
 
-  return (
-    <div>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h1>Users</h1>
-        <Link className={'btn-add'} to={'/users/new'}>Add new</Link>
-      </div>
+        console.log(user.id)
 
-      <div className={'card animated fadeInDown'}>
-        <table>
-          <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created at</th>
-            <th>Actions</th>
-          </tr>
-          </thead>
-          {loading && <tbody>
-          <tr>
-            <td colSpan={'5'} className={'text-center'}>
-              Loading...
-            </td>
-          </tr>
-          </tbody>
-          }
-          {!loading && <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.created_at}</td>
-              <td>
-                <Link className={'btn-edit'} to={'/users/' + user.id}>Edit</Link>
-                &nbsp;
-                <button onClick={(e) => onDelete(user)} className={'btn-delete'}>Delete</button>
-              </td>
-            </tr>
-          ))}
-          </tbody>
-          }
-        </table>
-      </div>
-    </div>
-  );
+        axiosClient.delete(`/users/${user.id}`)
+            .then(() => {
+                setNotification('User was deleted successfully')
+                // Update Users, fetch again
+                getUsers();
+            })
+    }
+
+    return (
+        <div>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <h1>Users</h1>
+                <Link className={'btn-add'} to={'/users/new'}>Add new</Link>
+            </div>
+
+            <div className={'card animated fadeInDown'}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Created at</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    {loading && <tbody>
+                    <tr>
+                        <td colSpan={'5'} className={'text-center'}>
+                            Loading...
+                        </td>
+                    </tr>
+                    </tbody>
+                    }
+                    {!loading && <tbody>
+                    {users.map(user => (
+                        <tr key={user.id}>
+                            <td>{user.id}</td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.created_at}</td>
+                            <td>
+                                <Link className={'btn-edit'} to={'/users/' + user.id}>Edit</Link>
+                                &nbsp;
+                                <button onClick={(e) => onDelete(user)} className={'btn-delete'}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    );
 }

@@ -3,6 +3,7 @@ import axiosClient from "../../axios-client.js";
 import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import Project from "./Project.jsx";
+import {getProjects} from "../../services/ProjectService.js";
 
 export default function Projects() {
   const {setNotification} = useStateConetxt()
@@ -11,20 +12,17 @@ export default function Projects() {
 
 
   useEffect(() => {
-    getProjects()
+    fetchProjects()
   }, [])
 
-  const getProjects = async (e) => {
+  const fetchProjects = async () => {
     setLoading(true)
-
     try {
-      const response = await axiosClient.get('/projects')
-      const projects = response.data
+      const projects = await getProjects();
+      setProjects(projects);
+    } catch (err) { /* empty */
+    } finally {
       setLoading(false)
-      setProjects(projects.data)
-    } catch (err) {
-      setLoading(false)
-      console.log(err)
     }
   }
 
@@ -44,40 +42,35 @@ export default function Projects() {
       })
   }
 
-  return (
-    <div>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h1>Projects</h1>
-        <Link className={'btn-add'} to={'/projects/new'}>Add new</Link>
-      </div>
-
-      <div className={'card animated fadeInDown'}>
-        <table>
-          <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Status</th>
-            {/*<th>Website</th>*/}
-            <th>Created at</th>
-          </tr>
-          </thead>
-          {loading && <tbody>
-          <tr>
-            <td colSpan={'5'} className={'text-center'}>
-              Loading...
-            </td>
-          </tr>
-          </tbody>
-          }
-          {!loading && <tbody>
-          {projects.map(project => (
-            <Project key={project.id} project={project} onDelete={onDelete}/>
-          ))}
-          </tbody>
-          }
-        </table>
-      </div>
+  return (<div>
+    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <h1>Projects</h1>
+      <Link className={'btn-add'} to={'/projects/new'}>Add new</Link>
     </div>
-  );
+
+    <div className={'card animated fadeInDown'}>
+      <table>
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Status</th>
+          {/*<th>Website</th>*/}
+          <th>Created at</th>
+        </tr>
+        </thead>
+        {loading && <tbody>
+        <tr>
+          <td colSpan={'5'} className={'text-center'}>
+            Loading...
+          </td>
+        </tr>
+        </tbody>}
+        {!loading && <tbody>
+        {projects.map(project => (
+          <Project key={project.id} project={project} onDelete={onDelete}/>))}
+        </tbody>}
+      </table>
+    </div>
+  </div>);
 }

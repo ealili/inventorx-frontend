@@ -3,6 +3,7 @@ import axiosClient from "../../axios-client.js";
 import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import Client from "./Client.jsx";
+import {getClients} from "../../services/ClientService.js";
 
 export default function Clients() {
   const {setNotification} = useStateConetxt()
@@ -11,20 +12,17 @@ export default function Clients() {
 
 
   useEffect(() => {
-    getClients()
+    fetchClients()
   }, [])
 
-  const getClients = async (e) => {
+  const fetchClients = async () => {
     setLoading(true)
-
     try {
-      const response = await axiosClient.get('/clients')
-      const clients = response.data
+      const clients = await getClients();
+      setClients(clients);
+    } catch (err) { /* empty */
+    } finally {
       setLoading(false)
-      setClients(clients.data)
-    } catch (err) {
-      setLoading(false)
-      console.log(err)
     }
   }
 
