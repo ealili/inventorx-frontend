@@ -42,7 +42,7 @@ input:focus {
 .btn-delete {
     font-family: "Roboto", sans-serif;
     outline: 0;
-    background: #5b08a7;
+    background: #212121;
     border: 0;
     text-decoration: none;
     padding: 15px;
@@ -188,8 +188,8 @@ table > tbody > tr > td {
 }
 
 #defaultLayout aside {
-    width: 240px;
-    background-color: #5b08a7;
+    width: 200px;
+    background-color: #212121;
     padding: 1rem
 }
 
