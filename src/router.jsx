@@ -12,6 +12,7 @@ import ResetPassword from "./views/user/ResetPassword.jsx";
 import Profile from "./views/user/Profile.jsx";
 import Clients from "./views/client/Clients.jsx";
 import Projects from "./views/project/Projects.jsx";
+import ClientForm from "./views/client/ClientForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: '/clients',
         element: <Clients/>
+      },
+      {
+        path: '/clients/:id',
+        element: <ClientForm key={'clientUpdate'}/>
+      },
+      {
+        path: '/clients/:id',
+        element: <ClientForm key={'clientCreate'}/>
       },
       {
         path: '/projects',

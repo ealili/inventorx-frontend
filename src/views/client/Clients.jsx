@@ -38,7 +38,7 @@ export default function Clients() {
       .then(() => {
         setNotification('Client was deleted successfully')
         // Update Clients, fetch again
-        getClients();
+        fetchClients();
       })
   }
 

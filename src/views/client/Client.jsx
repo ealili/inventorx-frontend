@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import axiosClient from "../../axios-client.js";
+import {getUsers} from "../../services/UserService.js";
 
 export default function Client({client, onDelete}) {
   return (
@@ -11,7 +13,7 @@ export default function Client({client, onDelete}) {
         {/*<td>{client.website}</td>*/}
         <td>{new Date(client.created_at).toLocaleDateString()}</td>
         <td>
-          <Link className={'btn-edit'} to={'/users/' + client.id}>Edit</Link>
+          <Link className={'btn-edit'} to={'/clients/' + client.id}>Edit</Link>
           &nbsp;
           <button onClick={(e) => onDelete(client)} className={'btn-delete'}>Delete</button>
         </td>
