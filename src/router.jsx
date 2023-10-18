@@ -5,13 +5,14 @@ import Users from "./views/user/Users.jsx";
 import NotFound from "./views/NotFound.jsx";
 import DefaultLayout from "./components/DefaultLayout.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
-import Dashboard from "./views/Dashboard.jsx";
 import UserForm from "./views/user/UserForm.jsx";
 import ForgotPassword from "./views/auth/ForgotPassword.jsx";
 import ResetPassword from "./views/user/ResetPassword.jsx";
 import Profile from "./views/user/Profile.jsx";
 import Clients from "./views/client/Clients.jsx";
 import Projects from "./views/project/Projects.jsx";
+import ClientForm from "./views/client/ClientForm.jsx";
+import Dashboard from "./views/dashboard/dashboard.component.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: '/clients',
         element: <Clients/>
+      },
+      {
+        path: '/clients/:id',
+        element: <ClientForm key={'clientUpdate'}/>
+      },
+      {
+        path: '/clients/:id',
+        element: <ClientForm key={'clientCreate'}/>
       },
       {
         path: '/projects',

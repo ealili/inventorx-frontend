@@ -1,26 +1,30 @@
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {RxCross2} from 'react-icons/rx'
+import {BiEditAlt} from "react-icons/bi";
 
 export default function Project({project, onDelete}) {
-  return (
-    <>
-      <tr>
-        <td>{project.id}</td>
-        <td>{project.name}</td>
-        <td>{project.status.status}</td>
-        {/*<td>{client.website}</td>*/}
-        <td>{new Date(project.created_at).toLocaleDateString()}</td>
-        <td>
-          <Link className={'btn-edit'} to={'/users/' + project.id}>Edit</Link>
-          &nbsp;
-          <button onClick={(e) => onDelete(project)} className={'btn-delete'}>Delete</button>
-        </td>
-      </tr>
-    </>
-  )
+    return (<>
+        <tr>
+            <td>{project.name}</td>
+            <td>{project.status.status}</td>
+            <td>{new Date(project.created_at).toLocaleDateString()}</td>
+            <td>{new Date(project.deadline).toLocaleDateString()}</td>
+            <td>
+                <Link style={{textDecoration: 'none'}} to={'/users/' + project.id}>
+                    <BiEditAlt style={{color: 'black', fontSize: '20px'}}/>
+                </Link>
+                &nbsp;
+            </td>
+            <td style={{textAlign: 'right'}}>
+                <RxCross2 id={'cross-button'} style={{color: 'red', fontSize: '22px'}}
+                          onClick={(e) => onDelete(project)}/>
+                {/*<button onClick={(e) => onDelete(project)} className={'btn-delete'}>X</button>*/}
+            </td>
+        </tr>
+    </>)
 }
 
 Project.propTypes = {
-  project: PropTypes.object,
-  onDelete: PropTypes.func
+    project: PropTypes.object, onDelete: PropTypes.func
 };

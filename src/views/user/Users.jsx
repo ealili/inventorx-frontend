@@ -3,6 +3,9 @@ import axiosClient from "../../axios-client.js";
 import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import {getUsers} from "../../services/UserService.js";
+import {PageHeader} from "../../components/shared/shared.styles.jsx";
+import {RxCross2} from "react-icons/rx";
+import {BiEditAlt} from "react-icons/bi";
 
 export default function Users() {
     const {setNotification} = useStateConetxt()
@@ -36,54 +39,53 @@ export default function Users() {
             .then(() => {
                 setNotification('User was deleted successfully')
                 // Update Users, fetch again
-                getUsers();
+                fetchUsers();
             })
     }
 
-    return (
-        <div>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <h1>Users</h1>
-                <Link className={'btn-add'} to={'/users/new'}>Add new</Link>
-            </div>
+    return (<div>
+        <PageHeader>
+            <h1>Users</h1>
+            <Link style={{padding: '10px 40px', fontSize: '16px'}} className={'btn-add'} to={'/users/new'}>
+                Create
+            </Link>
+        </PageHeader>
 
-            <div className={'card animated fadeInDown'}>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Created at</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    {loading && <tbody>
-                    <tr>
-                        <td colSpan={'5'} className={'text-center'}>
-                            Loading...
-                        </td>
-                    </tr>
-                    </tbody>
-                    }
-                    {!loading && <tbody>
-                    {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.created_at}</td>
-                            <td>
-                                <Link className={'btn-edit'} to={'/users/' + user.id}>Edit</Link>
-                                &nbsp;
-                                <button onClick={(e) => onDelete(user)} className={'btn-delete'}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                    }
-                </table>
-            </div>
+        <div className={'card animated fadeInDown'}>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Created at</th>
+                    <th>Actions</th>
+                    <th style={{textAlign: 'right'}}>Delete</th>
+                </tr>
+                </thead>
+                {loading && <tbody>
+                <tr>
+                    <td colSpan={'5'} className={'text-center'}>
+                        Loading...
+                    </td>
+                </tr>
+                </tbody>}
+                {!loading && <tbody>
+                {users.map(user => (<tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.created_at}</td>
+                    <td>
+                        <Link style={{textDecoration: 'none'}} to={'/users/' + user.id}><BiEditAlt
+                            style={{color: 'black', fontSize: '20px'}}/></Link>
+                        &nbsp;
+                    </td>
+                    <td style={{textAlign: 'right'}}>
+                        <RxCross2 id={'cross-button'} style={{color: 'red', fontSize: '22px'}}
+                                  onClick={(e) => onDelete(user)}/>
+                    </td>
+                </tr>))}
+                </tbody>}
+            </table>
         </div>
-    );
+    </div>);
 }

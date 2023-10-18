@@ -4,73 +4,77 @@ import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import Project from "./Project.jsx";
 import {getProjects} from "../../services/ProjectService.js";
+import {AiOutlinePlus} from 'react-icons/ai'
+import {PageHeader} from "../../components/shared/shared.styles.jsx";
 
 export default function Projects() {
-  const {setNotification} = useStateConetxt()
-  const [projects, setProjects] = useState([])
-  const [loading, setLoading] = useState(false)
+    const {setNotification} = useStateConetxt()
+    const [projects, setProjects] = useState([])
+    const [loading, setLoading] = useState(false)
 
 
-  useEffect(() => {
-    fetchProjects()
-  }, [])
+    useEffect(() => {
+        fetchProjects()
+    }, [])
 
-  const fetchProjects = async () => {
-    setLoading(true)
-    try {
-      const projects = await getProjects();
-      setProjects(projects);
-    } catch (err) { /* empty */
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const onDelete = (project) => {
-
-    if (!window.confirm('Are you sure you want to delete this project?')) {
-      return
+    const fetchProjects = async () => {
+        setLoading(true)
+        try {
+            const projects = await getProjects();
+            setProjects(projects);
+        } catch (err) { /* empty */
+        } finally {
+            setLoading(false)
+        }
     }
 
-    console.log(project.id)
+    const onDelete = (project) => {
 
-    axiosClient.delete(`/projects/${project.id}`)
-      .then(() => {
-        setNotification('Project was deleted successfully')
-        // Update Projects, fetch again
-        getProjects();
-      })
-  }
+        if (!window.confirm('Are you sure you want to delete this project?')) {
+            return
+        }
 
-  return (<div>
-    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-      <h1>Projects</h1>
-      <Link className={'btn-add'} to={'/projects/new'}>Add new</Link>
-    </div>
+        console.log(project.id)
 
-    <div className={'card animated fadeInDown'}>
-      <table>
-        <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Status</th>
-          {/*<th>Website</th>*/}
-          <th>Created at</th>
-        </tr>
-        </thead>
-        {loading && <tbody>
-        <tr>
-          <td colSpan={'5'} className={'text-center'}>
-            Loading...
-          </td>
-        </tr>
-        </tbody>}
-        {!loading && <tbody>
-        {projects.map(project => (
-          <Project key={project.id} project={project} onDelete={onDelete}/>))}
-        </tbody>}
-      </table>
-    </div>
-  </div>);
+        axiosClient.delete(`/projects/${project.id}`)
+            .then(() => {
+                setNotification('Project was deleted successfully')
+                // Update Projects, fetch again
+                fetchProjects();
+            })
+    }
+
+    return (<div>
+        <PageHeader>
+            <h1>Projects</h1>
+            <Link style={{padding: '10px 40px', fontSize: '16px'}} className={'btn-add'}
+                  to={'/projects/new'}>Create</Link>
+        </PageHeader>
+
+        <div className={'card animated fadeInDown'}>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Created at</th>
+                    <th>Deadline</th>
+                    <th>Edit</th>
+                    <th style={{textAlign: 'right'}}>Delete</th>
+                </tr>
+                </thead>
+                {loading && <tbody>
+                <tr>
+                    <td colSpan={'5'} className={'text-center'}>
+                        Loading...
+                    </td>
+                </tr>
+                </tbody>}
+                {!loading && <tbody>
+                {projects.map(project => (
+                    <Project key={project.id} project={project} onDelete={onDelete}/>))}
+                </tbody>}
+            </table>
+        </div>
+    </div>);
 }
