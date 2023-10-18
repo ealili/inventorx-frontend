@@ -190,20 +190,14 @@ table > tbody > tr > td {
 #defaultLayout aside {
     width: 200px;
     background-color: #212121;
-    padding: 1rem
-}
-
-#defaultLayout aside > a {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    color: white;
-    text-decoration: none;
-    transition: all 0.2s;
+    /*padding: 1rem*/
 }
 
 #defaultLayout aside > a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    /*Link*/
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+    background-color: white;
+    color: black;
 }
 
 #defaultLayout .content {
@@ -256,4 +250,8 @@ table > tbody > tr > td {
     vertical-align: middle;
     margin-left: 10px; /* Adjust the space between text and image as needed */
     border-radius: 50%; /* Makes the image round */
+}
+
+#cross-button:hover {
+    cursor: pointer;
 }

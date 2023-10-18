@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {useStateConetxt} from "../../contexts/ContextProvider.jsx";
 import Client from "./Client.jsx";
 import {getClients} from "../../services/ClientService.js";
+import {PageHeader} from "../../components/shared/shared.styles.jsx";
 
 export default function Clients() {
   const {setNotification} = useStateConetxt()
@@ -44,20 +45,23 @@ export default function Clients() {
 
   return (
     <div>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <PageHeader>
         <h1>Clients</h1>
-        <Link className={'btn-add'} to={'/clients/new'}>Add new</Link>
-      </div>
+        <Link style={{padding: '10px 40px', fontSize: '16px'}} className={'btn-add'}  to={'/clients/new'}>
+          Create
+        </Link>
+      </PageHeader>
 
       <div className={'card animated fadeInDown'}>
         <table>
           <thead>
           <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Address</th>
             {/*<th>Website</th>*/}
             <th>Created at</th>
+            <th>Edit</th>
+            <th style={{textAlign: 'right'}}>Delete</th>
           </tr>
           </thead>
           {loading && <tbody>

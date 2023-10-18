@@ -62,37 +62,31 @@ export default function UserForm() {
         }
     }
 
-    return (
-        <>
-            {user.id && <h2>Update User: <b>{user.name} ({user.email})</b></h2>}
-            {!user.id && <h2>Create User</h2>}
-            <div className={'card animated fadeInDown'}>
-                {loading && (
-                    <div className="text-center">Loading...</div>
-                )}
-                {errors && <div className={'alert'}>
-                    {Object.keys(errors).map(key => (
-                        <p key={key}>{errors[key][0]}</p>
-                    ))}
-                </div>}
-                {!loading &&
-                    <form onSubmit={onSubmit}>
-                        <FormInput label={'Name'} onChange={e => setUser({...user, name: e.target.value})}
-                                   value={user.name}/>
-                        <FormInput label={'Email'} onChange={e => setUser({...user, email: e.target.value})}
-                                   value={user.email}
-                                   type={'email'}/>
-                        {/*<FormInput label={'Password'} onChange={e => setUser({...user, password: e.target.value})}*/}
-                        {/*           value={''}*/}
-                        {/*           type={'password'}/>*/}
-                        {/*<FormInput label={'Password Confirmation'}*/}
-                        {/*           onChange={e => setUser({...user, password_confirmation: e.target.value})}*/}
-                        {/*           value={''}*/}
-                        {/*           type={'password'}/>*/}
-                        <button className="btn">Save</button>
-                    </form>}
+    return (<>
+        {user.id && <h2>Update User: <b>{user.name} ({user.email})</b></h2>}
+        {!user.id && <h2>Create User</h2>}
+        <div className={'card animated fadeInDown'}>
+            {loading && (<div className="text-center">Loading...</div>)}
+            {errors && <div className={'alert'}>
+                {Object.keys(errors).map(key => (<p key={key}>{errors[key][0]}</p>))}
+            </div>}
+            {!loading && <form onSubmit={onSubmit}>
+                <FormInput label={'Name'} onChange={e => setUser({...user, name: e.target.value})}
+                           value={user.name}/>
+                <FormInput label={'Email'} onChange={e => setUser({...user, email: e.target.value})}
+                           value={user.email}
+                           type={'email'}/>
+                <FormInput label={'Password'}
+                           onChange={e => setUser({...user, password: e.target.value})}
+                           value={user.password}
+                           type={'password'}/>
+                <FormInput label={'Password Confirmation'}
+                           onChange={e => setUser({...user, password_confirmation: e.target.value})}
+                           value={user.password_confirmation}
+                           type={'password'}/>
+                <button className="btn">Save</button>
+            </form>}
 
-            </div>
-        </>
-    );
+        </div>
+    </>);
 }
