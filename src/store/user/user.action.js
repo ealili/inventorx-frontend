@@ -1,13 +1,12 @@
-import {createAction} from "../../utils/reducer/reducer.utils.js";
+import { createAction } from "../../utils/reducer/reducer.utils.js";
+import { USER_ACTION_TYPES } from "./user.types.js";
 
 export const loginUser = (user, token) =>
-  createAction('LOGIN_USER', {user, token})
+  createAction(USER_ACTION_TYPES.LOGIN_USER, { user, token });
 
 export const logoutUser = () => {
-  // Clear user-related data from local storage
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
+  localStorage.clear();
   return {
-    type: 'LOGOUT_USER',
-  }
+    type: USER_ACTION_TYPES.LOGOUT_USER,
+  };
 };
