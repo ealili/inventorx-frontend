@@ -6,29 +6,41 @@ const axiosClient = axios.create({
 
 
 axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token')
+  const persistedStateString = localStorage.getItem('persist:root');
+  const persistedState = JSON.parse(persistedStateString);
+
+  // Access the user object from the parsed state
+  const userObject = JSON.parse(persistedState.user)
+
+  const token = userObject.token
   config.headers.Authorization = `Bearer ${token}`
 
   return config
 })
 
-axiosClient.interceptors.response.use((response) => {
-  return response
-}, (error) => {
-  const {response} = error;
-
-  if (response.status === 401) {
-    localStorage.removeItem('access_token')
-  }
-
-  throw error;
-})
+// axiosClient.interceptors.response.use((response) => {
+//   return response
+// }, (error) => {
+//   const {response} = error;
+//
+//   if (response.status === 401) {
+//     localStorage.removeItem('user')
+//   }
+//
+//   throw error;
+// })
 
 export default axiosClient
 
 
 export const request = async (method, url, params = {}) => {
-  const token = localStorage.getItem('access_token')
+  const persistedStateString = localStorage.getItem('persist:root');
+  const persistedState = JSON.parse(persistedStateString);
+
+  // Access the user object from the parsed state
+  const userObject = JSON.parse(persistedState.user)
+
+  const token = userObject.token
   try {
     const options = {
       method: method,
