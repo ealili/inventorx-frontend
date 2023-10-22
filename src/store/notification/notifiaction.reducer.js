@@ -11,6 +11,11 @@ export const notificationReducer = (state = NOTIFICATION_INITIAL_STATE, action =
         ...state,
         notification: payload,
       };
+    case "RESET_NOTIFICATION":
+      return {
+        ...state,
+        notification: null,
+      };
     default:
       return state;
   }
