@@ -1,15 +1,13 @@
 import { createAction } from "../../utils/reducer/reducer.utils.js";
-
-export const SET_NOTIFICATION = "SET_NOTIFICATION";
-export const RESET_NOTIFICATION = "RESET_NOTIFICATION";
+import { NOTIFICATION_ACTION_TYPES } from "./notification.types.js";
 
 export const setNotification = (message) => {
   return (dispatch) => {
-    dispatch(createAction(SET_NOTIFICATION, message));
+    dispatch(createAction(NOTIFICATION_ACTION_TYPES.SET_NOTIFICATION, message));
 
     // Automatically reset the notification after 5 seconds
     setTimeout(() => {
-      dispatch(createAction(RESET_NOTIFICATION, null));
+      dispatch(createAction(NOTIFICATION_ACTION_TYPES.RESET_NOTIFICATION, null));
     }, 5000);
   };
 };
