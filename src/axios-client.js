@@ -1,22 +1,21 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
-})
-
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+});
 
 axiosClient.interceptors.request.use((config) => {
-  const persistedStateString = localStorage.getItem('persist:root');
+  const persistedStateString = localStorage.getItem("persist:root");
   const persistedState = JSON.parse(persistedStateString);
 
   // Access the user object from the parsed state
-  const userObject = JSON.parse(persistedState.user)
+  const userObject = JSON.parse(persistedState.user);
 
-  const token = userObject.token
-  config.headers.Authorization = `Bearer ${token}`
+  const token = userObject.token;
+  config.headers.Authorization = `Bearer ${token}`;
 
-  return config
-})
+  return config;
+});
 
 // axiosClient.interceptors.response.use((response) => {
 //   return response
@@ -30,41 +29,30 @@ axiosClient.interceptors.request.use((config) => {
 //   throw error;
 // })
 
-export default axiosClient
-
+export default axiosClient;
 
 export const request = async (method, url, params = {}) => {
-  const persistedStateString = localStorage.getItem('persist:root');
-  const persistedState = JSON.parse(persistedStateString);
-
-  // Access the user object from the parsed state
-  const userObject = JSON.parse(persistedState.user)
-
-  const token = userObject.token
   try {
+    const persistedState = JSON.parse(localStorage.getItem("persist:root"));
+    const userObject = JSON.parse(persistedState?.user || "{}");
+    const token = userObject?.token;
+
     const options = {
       method: method,
       url: `${import.meta.env.VITE_API_BASE_URL}/api/${url}`,
       data: params,
       headers: {
-        "Accept": "application/json", "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    }
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
     const response = await axios(options);
+    const responseData = response?.data?.data || response?.data;
 
-    if (response.data !== undefined && response.data !== null) {
-      if (response.data.data !== undefined && response.data.data !== null) {
-        return response.data.data;
-      } else {
-        return response.data;
-      }
-    } else {
-      return response;
-    }
-
+    return responseData !== undefined ? responseData : response;
   } catch (error) {
     throw error;
   }
-}
+};
