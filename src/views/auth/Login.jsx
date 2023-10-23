@@ -1,18 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/user/user.action.js";
 import axios from "axios";
+import { selectCurrentUser } from "../../store/user/user.selector.js";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const [errors, setErrors] = useState(null);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/users");
+    }
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
