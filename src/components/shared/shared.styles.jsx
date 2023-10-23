@@ -1,7 +1,7 @@
-import {styled} from "styled-components";
+import { styled } from "styled-components";
 
-export const PageHeader = styled.div`
+export const PageHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;

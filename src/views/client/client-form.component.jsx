@@ -1,33 +1,29 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import FormInput from "../../components/form-input/FormInput.jsx";
+import PageHeader from "../../components/page-header/page-header.component.jsx";
 
-export default function UserForm() {
+export default function ClientForm() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
-  const [user, setUser] = useState({
+  const [client, setClient] = useState({
     id: null,
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
+    company_name: "",
+    address: "",
   });
-
-  const { setNotification } = useStateConetxt();
 
   useEffect(() => {
     console.log(id);
     if (id) {
       setLoading(true);
       axiosClient
-        .get(`users/${id}`)
+        .get(`clients/${id}`)
         .then(({ data }) => {
           setLoading(false);
-          setUser(data.data);
+          setClient(data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -39,12 +35,12 @@ export default function UserForm() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (user.id) {
+    if (client.id) {
       axiosClient
-        .put(`users/${user.id}`, user)
+        .put(`clients/${client.id}`, client)
         .then(() => {
-          setNotification("User updated successfully");
-          navigate("/users");
+          // Dispatch notification
+          navigate("/clients");
         })
         .catch((err) => {
           const response = err.response;
@@ -54,10 +50,10 @@ export default function UserForm() {
         });
     } else {
       axiosClient
-        .post("/users", user)
+        .post("/clients", client)
         .then(() => {
-          setNotification("User created successfully");
-          navigate("/users");
+          // Dispatch notification
+          navigate("/clients");
         })
         .catch((err) => {
           const response = err.response;
@@ -70,15 +66,8 @@ export default function UserForm() {
 
   return (
     <>
-      {user.id && (
-        <h2>
-          Update User:{" "}
-          <b>
-            {user.name} ({user.email})
-          </b>
-        </h2>
-      )}
-      {!user.id && <h2>Create User</h2>}
+      {client.id && <PageHeader model={"Client"} title={client.company_name} />}
+      {!client.id && <h2>Create Client</h2>}
       <div className={"card animated fadeInDown"}>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
@@ -91,27 +80,15 @@ export default function UserForm() {
         {!loading && (
           <form onSubmit={onSubmit}>
             <FormInput
-              label={"Name"}
-              onChange={(e) => setUser({ ...user, name: e.target.value })}
-              value={user.name}
+              label={"Company Name"}
+              onChange={(e) => setClient({ ...client, company_name: e.target.value })}
+              value={client.company_name}
             />
             <FormInput
-              label={"Email"}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
-              value={user.email}
-              type={"email"}
-            />
-            <FormInput
-              label={"Password"}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
-              value={user.password}
-              type={"password"}
-            />
-            <FormInput
-              label={"Password Confirmation"}
-              onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
-              value={user.password_confirmation}
-              type={"password"}
+              label={"Address"}
+              onChange={(e) => setClient({ ...client, address: e.target.value })}
+              value={client.address}
+              type={"text"}
             />
             <button className="btn">Save</button>
           </form>
