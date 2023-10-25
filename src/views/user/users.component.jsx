@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../services/UserService.js";
-import { PageHeader } from "../../components/shared/shared.styles.jsx";
+import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 import { RxCross2 } from "react-icons/rx";
 import { BiEditAlt } from "react-icons/bi";
 import { useDispatch } from "react-redux";
@@ -38,13 +38,13 @@ export default function Users() {
     axiosClient.delete(`/users/${user.id}`).then(() => {
       // Update Users, fetch again
       dispatch(setNotification("User was deleted successfully"));
-      // fetchUsers();
+      fetchUsers();
     });
   };
 
   return (
     <div>
-      <PageHeader>
+      <PageHeaderContainer>
         <h1>Users</h1>
         <Link
           style={{ padding: "10px 40px", fontSize: "16px" }}
@@ -53,7 +53,7 @@ export default function Users() {
         >
           Create
         </Link>
-      </PageHeader>
+      </PageHeaderContainer>
 
       <div className={"card animated fadeInDown"}>
         <table>
