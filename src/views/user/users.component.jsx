@@ -38,7 +38,7 @@ export default function Users() {
     axiosClient.delete(`/users/${user.id}`).then(() => {
       // Update Users, fetch again
       dispatch(setNotification("User was deleted successfully"));
-      // fetchUsers();
+      fetchUsers();
     });
   };
 

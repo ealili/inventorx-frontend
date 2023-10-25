@@ -33,7 +33,7 @@ export default function Login() {
     setErrors(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login", payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/login`, payload);
       // Dispatch the login action
       const { user, token } = response.data;
       console.log("user", user);
