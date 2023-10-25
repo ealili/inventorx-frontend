@@ -1,58 +1,61 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
-})
-
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+});
 
 axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token')
-  config.headers.Authorization = `Bearer ${token}`
+  const persistedStateString = localStorage.getItem("persist:root");
+  const persistedState = JSON.parse(persistedStateString);
 
-  return config
-})
+  // Access the user object from the parsed state
+  const userObject = JSON.parse(persistedState.user);
 
-axiosClient.interceptors.response.use((response) => {
-  return response
-}, (error) => {
-  const {response} = error;
+  const token = userObject.token;
+  config.headers.Authorization = `Bearer ${token}`;
 
-  if (response.status === 401) {
-    localStorage.removeItem('access_token')
+  return config;
+});
+
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const { response } = error;
+
+    if (response.status === 401) {
+      localStorage.clear();
+    }
+
+    throw error;
   }
+);
 
-  throw error;
-})
-
-export default axiosClient
-
+export default axiosClient;
 
 export const request = async (method, url, params = {}) => {
-  const token = localStorage.getItem('access_token')
   try {
+    const persistedState = JSON.parse(localStorage.getItem("persist:root"));
+    const userObject = JSON.parse(persistedState?.user || "{}");
+    const token = userObject?.token;
+
     const options = {
       method: method,
       url: `${import.meta.env.VITE_API_BASE_URL}/api/${url}`,
       data: params,
       headers: {
-        "Accept": "application/json", "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    }
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
     const response = await axios(options);
+    const responseData = response?.data?.data || response?.data;
 
-    if (response.data !== undefined && response.data !== null) {
-      if (response.data.data !== undefined && response.data.data !== null) {
-        return response.data.data;
-      } else {
-        return response.data;
-      }
-    } else {
-      return response;
-    }
-
+    return responseData !== undefined ? responseData : response;
   } catch (error) {
     throw error;
   }
-}
+};
