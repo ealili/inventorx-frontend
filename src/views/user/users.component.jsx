@@ -7,6 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 import { BiEditAlt } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { setNotification } from "../../store/notification/notification.action.js";
+import User from "./user.component.jsx";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -78,24 +79,7 @@ export default function Users() {
           {!loading && (
             <tbody>
               {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.created_at}</td>
-                  <td>
-                    <Link style={{ textDecoration: "none" }} to={"/users/" + user.id}>
-                      <BiEditAlt style={{ color: "black", fontSize: "20px" }} />
-                    </Link>
-                    &nbsp;
-                  </td>
-                  <td style={{ textAlign: "right" }}>
-                    <RxCross2
-                      id={"cross-button"}
-                      style={{ color: "red", fontSize: "22px" }}
-                      onClick={(e) => onDelete(user)}
-                    />
-                  </td>
-                </tr>
+                <User key={user.id} user={user} onDelete={onDelete} />
               ))}
             </tbody>
           )}
