@@ -73,7 +73,7 @@ export default function Login() {
             Log in
           </button>
           <p className="message">
-            Don't have an account? <Link to={"/signup"}>Register</Link>
+            Don`&apos;`t have an account? <Link to={"/signup"}>Register</Link>
           </p>
 
           <p className="message">
