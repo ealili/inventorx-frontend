@@ -26,6 +26,7 @@ axiosClient.interceptors.response.use(
 
     if (response.status === 401) {
       localStorage.clear();
+      window.location.href = "/";
     }
 
     throw error;
@@ -56,6 +57,13 @@ export const request = async (method, url, params = {}) => {
 
     return responseData !== undefined ? responseData : response;
   } catch (error) {
+    const { response } = error;
+
+    if (response.status === 401) {
+      localStorage.clear();
+      window.location.href = "/";
+    }
+
     throw error;
   }
 };
