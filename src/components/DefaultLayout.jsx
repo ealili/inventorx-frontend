@@ -4,7 +4,7 @@ import { FiUser, FiUsers } from "react-icons/fi";
 import { TbUsersGroup } from "react-icons/tb";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
-import { NavLink } from "./default-layout.styles.jsx";
+import { NavLink, TeamLogo } from "./default-layout.styles.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser, selectToken } from "../store/user/user.selector.js";
 import { logoutUser } from "../store/user/user.action.js";
@@ -54,6 +54,7 @@ export default function DefaultLayout() {
   return (
     <div id={"defaultLayout"}>
       <aside>
+        <TeamLogo>{user.team?.name}</TeamLogo>
         <NavLink to={"/dashboard"}>
           <RxDashboard style={{ fontSize: "22px", margin: "0 10px" }} />
           Dashboard

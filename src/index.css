@@ -96,9 +96,7 @@ input:focus {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.btn:hover,
-.btn:active,
-.btn:focus {
+.btn:hover {
   background: #fff;
   color: #000;
   border: 1px solid black;
@@ -296,4 +294,19 @@ input[type="date"]::-moz-calendar-box {
 /* Remove the default clear button in some browsers */
 input[type="date"]::-webkit-clear-button {
   display: none;
+}
+
+/* Your existing CSS */
+
+.fade-in {
+  opacity: 1;
+  max-height: 1000px; /* Set to a sufficiently large value */
+  transition: opacity 0.5s ease, max-height 0.4s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.5s ease, max-height 0.4s ease;
+  overflow: hidden;
 }

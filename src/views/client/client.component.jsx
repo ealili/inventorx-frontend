@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import axiosClient from "../../axios-client.js";
-import { getUsers } from "../../services/UserService.js";
 import { RxCross2 } from "react-icons/rx";
 import { BiEditAlt } from "react-icons/bi";
 
