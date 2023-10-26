@@ -16,7 +16,6 @@ export default function DefaultLayout() {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
   const notification = useSelector(selectNotification);
-  console.log(notification);
   const navigate = useNavigate();
   // const [loading, setLoading] = useState(false)
 
@@ -37,11 +36,8 @@ export default function DefaultLayout() {
   //   }
   // }
 
-  console.log(user);
-  console.log(token);
-
   if (!token) {
-    console.log("no token");
+    console.log("Invalid token");
     return <Navigate to={"/login"} />;
   }
 

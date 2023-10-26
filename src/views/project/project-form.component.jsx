@@ -3,6 +3,7 @@ import axiosClient, { request } from "../../axios-client.js";
 import { useEffect, useState } from "react";
 import FormInput from "../../components/form-input/FormInput.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
+import { FormContainer } from "../../components/shared/shared.styles.jsx";
 
 const ProjectForm = () => {
   const navigate = useNavigate();
@@ -28,14 +29,12 @@ const ProjectForm = () => {
       axiosClient
         .get(`projects/${id}`)
         .then(({ data }) => {
-          console.log(data);
-
           setLoading(false);
           setProject(data.data);
-          setselectedStatus(data.data.status.status);
+          setselectedStatus(data.data.status.id);
         })
         .catch((err) => {
-          console.log(err);
+          // Set error
           setLoading(false);
         });
     }
@@ -44,15 +43,16 @@ const ProjectForm = () => {
   const fetchProjectStatuses = async () => {
     const response = await request("GET", "statuses");
     setprojectStatuses(response);
-    console.log(response);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
+    const payload = { ...project, project_status_id: parseInt(selectedStatus) };
+
     if (project.id) {
       axiosClient
-        .put(`projects/${project.id}`, project)
+        .put(`projects/${project.id}`, payload)
         .then(() => {
           //   setNotification("Project updated successfully");
           navigate("/projects");
@@ -106,7 +106,7 @@ const ProjectForm = () => {
     <>
       {project.id && <PageHeader model={"Project"} title={project.name} />}
       {!project.id && <h2>Create Project</h2>}
-      <div className={"card animated fadeInDown"}>
+      <FormContainer>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
           <div className={"alert"}>
@@ -139,7 +139,7 @@ const ProjectForm = () => {
             >
               {projectStatuses &&
                 projectStatuses.map((projectStatus) => (
-                  <option key={projectStatus.id} value={projectStatus.status}>
+                  <option key={projectStatus.id} value={projectStatus.id}>
                     {projectStatus.status}
                   </option>
                 ))}
@@ -165,7 +165,7 @@ const ProjectForm = () => {
             <button className="btn">Save</button>
           </form>
         )}
-      </div>
+      </FormContainer>
     </>
   );
 };

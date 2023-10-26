@@ -3,6 +3,7 @@ import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
 import FormInput from "../../components/form-input/FormInput.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
+import { FormContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function ClientForm() {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default function ClientForm() {
     <>
       {client.id && <PageHeader model={"Client"} title={client.company_name} />}
       {!client.id && <h2>Create Client</h2>}
-      <div className={"card animated fadeInDown"}>
+      <FormContainer>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
           <div className={"alert"}>
@@ -93,7 +94,7 @@ export default function ClientForm() {
             <button className="btn">Save</button>
           </form>
         )}
-      </div>
+      </FormContainer>
     </>
   );
 }

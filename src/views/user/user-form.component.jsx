@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import FormInput from "../../components/form-input/FormInput.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
+import { FormContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function UserForm() {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ export default function UserForm() {
     <>
       {user.id && <PageHeader model="User" title={`${user.name}`} />}
       {!user.id && <h2>Create User</h2>}
-      <div className={"card animated fadeInDown"}>
+      <FormContainer>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
           <div className={"alert"}>
@@ -110,7 +111,7 @@ export default function UserForm() {
             <button className="btn">Save</button>
           </form>
         )}
-      </div>
+      </FormContainer>
     </>
   );
 }

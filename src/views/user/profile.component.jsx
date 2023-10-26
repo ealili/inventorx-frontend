@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
+import { FormContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -118,7 +119,7 @@ export default function Profile() {
   return (
     <>
       {user.id && <h2>Profile</h2>}
-      <div className={"card animated fadeInDown"}>
+      <FormContainer>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
           <div className={"alert"}>
@@ -190,7 +191,7 @@ export default function Profile() {
         <button style={{ display: `${displayBtn}` }} onClick={handleClick} className={"btn"}>
           Change Password
         </button>
-      </div>
+      </FormContainer>
     </>
   );
 }
