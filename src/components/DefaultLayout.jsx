@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser, selectToken } from "../store/user/user.selector.js";
 import { logoutUser } from "../store/user/user.action.js";
 import { selectNotification } from "../store/notification/notification.selector.js";
+import { useEffect } from "react";
+import { setNotification } from "../store/notification/notification.action.js";
 
 export default function DefaultLayout() {
   const user = useSelector(selectCurrentUser);
@@ -20,9 +22,9 @@ export default function DefaultLayout() {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   fetchUser()
-  // }, [])
+  useEffect(() => {
+    dispatch(setNotification(""));
+  }, []);
 
   // const fetchUser = async () => {
   //   setLoading(true)
