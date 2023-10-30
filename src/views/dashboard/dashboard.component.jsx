@@ -1,6 +1,7 @@
-import { DashboardContainer, DashboardItem } from "./dashboard.styles.jsx";
+import { DashboardContainer } from "./dashboard.styles.jsx";
 import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client.js";
+import DashboardItem from "./dashboard-item.component.jsx";
 
 const Dashboard = () => {
   const [insights, setInsights] = useState(null);
@@ -12,6 +13,7 @@ const Dashboard = () => {
   const fetchInsights = async () => {
     const response = await axiosClient.get("insights");
     const insights = await response.data;
+    console.log(insights);
     setInsights(insights);
   };
 
@@ -19,22 +21,9 @@ const Dashboard = () => {
     <>
       {insights && (
         <DashboardContainer>
-          <DashboardItem>
-            <h2>{insights.clients_count}</h2>
-            <h2>Clients</h2>
-          </DashboardItem>
-          <DashboardItem>
-            <h2>{insights.projects_count}</h2>
-            <h2>Projects</h2>
-          </DashboardItem>
-          <DashboardItem>
-            <h2>{insights.users_count}</h2>
-            <h2>Users</h2>
-          </DashboardItem>
-          <DashboardItem>
-            <h2>{insights.tasks_count}</h2>
-            <h2>Tasks</h2>
-          </DashboardItem>
+          {Object.keys(insights).map((key, index) => (
+            <DashboardItem key={index} model={key} count={insights[key]} />
+          ))}
         </DashboardContainer>
       )}
     </>
