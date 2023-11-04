@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
-import { FormContainer } from "../../components/shared/shared.styles.jsx";
+import { FormContainer, PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -118,7 +118,11 @@ export default function Profile() {
 
   return (
     <>
-      {user.id && <h2>Profile</h2>}
+      {user.id && (
+        <PageHeaderContainer>
+          <h1>Profile</h1>
+        </PageHeaderContainer>
+      )}
       <FormContainer>
         {loading && <div className="text-center">Loading...</div>}
         {errors && (
