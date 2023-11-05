@@ -91,6 +91,12 @@ export default function ClientForm() {
               value={client.address}
               type={"text"}
             />
+            <FormInput
+              label={"Website"}
+              onChange={(e) => setClient({ ...client, website: e.target.value })}
+              value={client.website}
+              type={"text"}
+            />
             <button className="btn">Save</button>
           </form>
         )}

@@ -40,7 +40,7 @@ export default function Login() {
       console.log("token", token);
       dispatch(loginUser(user, token));
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       const response = err.response;
       if (response && (response.status === 422 || response.status === 400)) {

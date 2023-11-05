@@ -38,6 +38,7 @@ export default function DefaultLayout() {
 
   if (!token) {
     console.log("Invalid token");
+
     return <Navigate to={"/login"} />;
   }
 
