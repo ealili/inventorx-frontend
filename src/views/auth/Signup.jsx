@@ -50,34 +50,9 @@ export default function Signup() {
       });
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    setStep(step + 1);
-  };
-
-  const handleBack = (e) => {
-    e.preventDefault();
-    setStep(step - 1);
-  };
-
   return (
     <div className="login-signup-form animated fadeInDown">
       <div className="form">
-        {step > 1 && (
-          <div>
-            <button
-              type="button"
-              onClick={handleBack}
-              className="btn"
-              style={{
-                color: "black",
-                backgroundColor: "transparent",
-              }}
-            >
-              <BiArrowBack style={{ fontSize: "20px" }} />
-            </button>
-          </div>
-        )}
         <form onSubmit={onSubmit}>
           <h1 className={"title"}>Register</h1>
           {errors && (
@@ -89,6 +64,7 @@ export default function Signup() {
           )}
 
           <div className={step === 1 ? "fade-in" : "fade-out"}>
+            <input ref={teamNameRef} type="text" placeholder={"Team Name"} />
             <input ref={nameRef} type="text" placeholder={"Full Name"} required />
             <input ref={emailRef} type="email" placeholder={"Email Address"} required />
             <input ref={passwordRef} type="password" placeholder={"Password"} required />
@@ -98,21 +74,9 @@ export default function Signup() {
               placeholder={"Password confirmation"}
               required
             />
-          </div>
-
-          <div className={step === 2 ? "fade-in" : "fade-out"}>
-            <input ref={teamNameRef} type="text" placeholder={"Team Name"} />
-          </div>
-          <div>
-            {step < 2 ? (
-              <button className="btn btn-block" type="button" onClick={handleNext}>
-                Next
-              </button>
-            ) : (
-              <button className="btn btn-block" type="submit">
-                Submit
-              </button>
-            )}
+            <button className="btn btn-block" type="submit">
+              Sign Up
+            </button>
           </div>
         </form>
 
