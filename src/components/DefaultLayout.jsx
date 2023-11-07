@@ -11,6 +11,7 @@ import { logoutUser } from "../store/user/user.action.js";
 import { selectNotification } from "../store/notification/notification.selector.js";
 import { useEffect } from "react";
 import { setNotification } from "../store/notification/notification.action.js";
+import { Link } from "react-router-dom";
 
 export default function DefaultLayout() {
   const user = useSelector(selectCurrentUser);
@@ -52,7 +53,9 @@ export default function DefaultLayout() {
   return (
     <div id={"defaultLayout"}>
       <aside>
-        <TeamLogo>{user.team?.name}</TeamLogo>
+        <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          <TeamLogo>{user.team?.name}</TeamLogo>
+        </Link>
         <NavLink to={"/dashboard"}>
           <RxDashboard style={{ fontSize: "22px", margin: "0 10px" }} />
           Dashboard
