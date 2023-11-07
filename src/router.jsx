@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         // Can also be rendered directly, this is navigated...
-        element: <Navigate to={"/users"} />,
+        element: <Navigate to={"/dashboard"} />,
       },
       {
         path: "/dashboard",
