@@ -40,7 +40,7 @@ export default function Login() {
       console.log("token", token);
       dispatch(loginUser(user, token));
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       const response = err.response;
       if (response && (response.status === 422 || response.status === 400)) {
@@ -67,7 +67,9 @@ export default function Login() {
               ))}
             </div>
           )}
+          <label className="form-label">Email</label>
           <input ref={emailRef} type="email" placeholder={"Email"} />
+          <label className="form-label">Password</label>
           <input ref={passwordRef} type="password" placeholder={"Password"} />
           <button className="btn btn-block" type={"submit"}>
             Log in
