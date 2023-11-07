@@ -6,7 +6,7 @@ export const NavLink = styled(Link)`
   align-items: center;
   padding: 20px;
   /*padding: 20px 25px;*/
-  color: white;
+  color: #000;
   text-decoration: none;
   transition: all 0.2s;
 `;
@@ -17,4 +17,10 @@ export const TeamLogo = styled.div`
   color: white;
   text-align: center;
   padding: 20px;
+`;
+
+export const LogOutLink = styled.a`
+  text-decoration: none;
+  width: 100%;
+  color: #000;
 `;
