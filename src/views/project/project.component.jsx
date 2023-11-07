@@ -21,7 +21,7 @@ export default function Project({ project, onDelete }) {
           <RxCross2
             id={"cross-button"}
             style={{ color: "red", fontSize: "22px" }}
-            onClick={(e) => onDelete(project)}
+            onClick={() => onDelete(project)}
           />
           {/*<button onClick={(e) => onDelete(project)} className={'btn-delete'}>X</button>*/}
         </td>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import Project from "./project.component.jsx";
 import { getProjects } from "../../services/ProjectService.js";
-import { AiOutlinePlus } from "react-icons/ai";
 import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function Projects() {

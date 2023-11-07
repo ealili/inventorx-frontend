@@ -3,19 +3,10 @@ import "./form-input.styles.scss";
 
 const FormInput = ({ label, ...otherProps }) => {
   return (
-    <div className={"group"}>
-      <input className={"form-input"} {...otherProps} />
-      {label && (
-        <label
-          className={`${
-            otherProps.value && otherProps.value.length > 0 ? "shrink" : ""
-          } form-input-label`}
-          htmlFor=""
-        >
-          {label}
-        </label>
-      )}
-    </div>
+    <>
+      <label className="form-label">{label}</label>
+      <input className={"form-input"} placeholder={label} {...otherProps} />
+    </>
   );
 };
 

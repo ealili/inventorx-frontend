@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { Link } from "react-router-dom";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
+import { setNotification } from "../../store/notification/notification.action.js";
+import { useDispatch } from "react-redux";
 import Client from "./client.component.jsx";
 import { getClients } from "../../services/ClientService.js";
 import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 
 export default function Clients() {
-  const { setNotification } = useStateConetxt();
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchClients();
@@ -35,7 +37,7 @@ export default function Clients() {
     console.log(client.id);
 
     axiosClient.delete(`/clients/${client.id}`).then(() => {
-      setNotification("Client was deleted successfully");
+      dispatch(setNotification("Client was deleted successfully"));
       // Update Clients, fetch again
       fetchClients();
     });

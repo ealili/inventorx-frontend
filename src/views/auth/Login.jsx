@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import axiosClient from "../../axios-client.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/user/user.action.js";
 import axios from "axios";

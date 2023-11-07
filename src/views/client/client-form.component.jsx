@@ -1,12 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
-import FormInput from "../../components/form-input/FormInput.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
 import { FormContainer } from "../../components/shared/shared.styles.jsx";
+import { setNotification } from "../../store/notification/notification.action.js";
 
 export default function ClientForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(null);
@@ -14,11 +16,11 @@ export default function ClientForm() {
     id: null,
     company_name: "",
     address: "",
+    website: "",
   });
 
   useEffect(() => {
-    console.log(id);
-    if (id) {
+    if (!isNaN(id)) {
       setLoading(true);
       axiosClient
         .get(`clients/${id}`)
@@ -40,7 +42,7 @@ export default function ClientForm() {
       axiosClient
         .put(`clients/${client.id}`, client)
         .then(() => {
-          // Dispatch notification
+          dispatch(setNotification("Client has been updated successfully"));
           navigate("/clients");
         })
         .catch((err) => {
@@ -53,7 +55,7 @@ export default function ClientForm() {
       axiosClient
         .post("/clients", client)
         .then(() => {
-          // Dispatch notification
+          dispatch(setNotification("Client has been created successfully"));
           navigate("/clients");
         })
         .catch((err) => {

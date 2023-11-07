@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
 import { FormContainer } from "../../components/shared/shared.styles.jsx";
 import { Link } from "react-router-dom";
+import FormInput from "../../components/form-input/FormInput.jsx";
+import Select from "../../components/select/select.component.jsx";
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -151,60 +153,27 @@ const ProjectForm = () => {
           )}
           {!loading && (
             <form onSubmit={onSubmit}>
-              <label className="form-label">Project Name</label>
-              <input
-                label={"Name"}
+              <FormInput
+                label={"Project Name"}
                 onChange={(e) => setProject({ ...project, name: e.target.value })}
                 value={project.name}
               />
-              {/* TODO: Optimize, create new Select Component */}
-              <label className="form-label">Status</label>
-              <select
-                style={{
-                  padding: "15px 10px",
-                  width: "100%",
-                  borderColor: "#ccc",
-                  borderRadius: "5px",
-                }}
-                name="project"
-                id=""
-                value={selectedStatus}
-                onChange={handleStatusChange}
-              >
-                {projectStatuses &&
-                  projectStatuses.map((projectStatus) => (
-                    <option key={projectStatus.id} value={projectStatus.id}>
-                      {projectStatus.status}
-                    </option>
-                  ))}
-              </select>
+              <Select
+                data={projectStatuses}
+                name="Project Status"
+                handleChange={handleStatusChange}
+                selected={selectedStatus}
+                col="status"
+              />
               <br />
               <br />
-              <label className="form-label">Client</label>
-              {clients && (
-                <>
-                  <select
-                    style={{
-                      padding: "15px 10px",
-                      width: "100%",
-                      borderColor: "#ccc",
-                      borderRadius: "5px",
-                    }}
-                    name="project"
-                    id=""
-                    value={selectedClient}
-                    onChange={handleClientChange}
-                  >
-                    {clients.map((client) => (
-                      <option key={client.id} value={client.id}>
-                        {client.company_name}
-                      </option>
-                    ))}
-                  </select>
-                  <br />
-                  <br />
-                </>
-              )}
+              <Select
+                data={clients}
+                name="Client"
+                handleChange={handleClientChange}
+                selected={selectedClient}
+                col="company_name"
+              />
               <label className="form-label"> Deadline</label>
               <input
                 type="date"
@@ -215,9 +184,8 @@ const ProjectForm = () => {
                 style={{ marginTop: "10px" }}
                 required
               />
-              <label className="form-label">Description</label>
-              <input
-                placeholder={"Description"}
+              <FormInput
+                label="Description"
                 onChange={(e) => setProject({ ...project, description: e.target.value })}
                 value={project.description}
                 required

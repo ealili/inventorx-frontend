@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/user/user.action.js";
-import FormInput from "../../components/form-input/FormInput.jsx";
 
 export default function Signup() {
   const navigate = useNavigate();
