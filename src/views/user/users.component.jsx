@@ -3,8 +3,6 @@ import axiosClient from "../../axios-client.js";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../services/UserService.js";
 import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
-import { RxCross2 } from "react-icons/rx";
-import { BiEditAlt } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { setNotification } from "../../store/notification/notification.action.js";
 import User from "./user.component.jsx";

@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import axiosClient from "../axios-client.js";
 import { FiUser, FiUsers } from "react-icons/fi";
 import { TbUsersGroup } from "react-icons/tb";
@@ -16,7 +16,6 @@ export default function DefaultLayout() {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectToken);
   const notification = useSelector(selectNotification);
-  const navigate = useNavigate();
   // const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch();

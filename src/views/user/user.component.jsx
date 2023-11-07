@@ -20,7 +20,7 @@ export default function User({ user, onDelete }) {
           <RxCross2
             id={"cross-button"}
             style={{ color: "red", fontSize: "22px" }}
-            onClick={(e) => onDelete(user)}
+            onClick={() => onDelete(user)}
           />
         </td>
       </tr>
