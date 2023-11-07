@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient, { request } from "../../axios-client.js";
 import { useEffect, useState } from "react";
-import FormInput from "../../components/form-input/FormInput.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
 import { FormContainer } from "../../components/shared/shared.styles.jsx";
+import { Link } from "react-router-dom";
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -135,7 +135,10 @@ const ProjectForm = () => {
       {project.id && <PageHeader model={"Project"} title={project.name} />}
       {!project.id && <h2>Create Project</h2>}
       {clients?.length < 1 ? (
-        <h3>Ops you don't have any clients yet</h3>
+        <h3 style={{ marginTop: "10%", textAlign: "center" }}>
+          You do not have any clients yet. <br /> In order to create a project, first create a
+          client <Link to={"/clients/new"}>here.</Link>
+        </h3>
       ) : (
         <FormContainer>
           {loading && <div className="text-center">Loading...</div>}
@@ -148,18 +151,18 @@ const ProjectForm = () => {
           )}
           {!loading && (
             <form onSubmit={onSubmit}>
-              <FormInput
+              <label className="form-label">Project Name</label>
+              <input
                 label={"Name"}
                 onChange={(e) => setProject({ ...project, name: e.target.value })}
                 value={project.name}
               />
               {/* TODO: Optimize, create new Select Component */}
-              <label htmlFor="status">Status</label>
+              <label className="form-label">Status</label>
               <select
                 style={{
                   padding: "15px 10px",
                   width: "100%",
-                  marginTop: "10px",
                   borderColor: "#ccc",
                   borderRadius: "5px",
                 }}
@@ -177,13 +180,13 @@ const ProjectForm = () => {
               </select>
               <br />
               <br />
+              <label className="form-label">Client</label>
               {clients && (
                 <>
                   <select
                     style={{
                       padding: "15px 10px",
                       width: "100%",
-                      marginTop: "10px",
                       borderColor: "#ccc",
                       borderRadius: "5px",
                     }}
@@ -202,7 +205,7 @@ const ProjectForm = () => {
                   <br />
                 </>
               )}
-              <label htmlFor="deadline"> Deadline</label>
+              <label className="form-label"> Deadline</label>
               <input
                 type="date"
                 id="start"
@@ -210,11 +213,14 @@ const ProjectForm = () => {
                 onChange={(e) => setProject({ ...project, deadline: e.target.value })}
                 min={getCurrentDate()}
                 style={{ marginTop: "10px" }}
+                required
               />
-              <FormInput
-                label={"Description"}
+              <label className="form-label">Description</label>
+              <input
+                placeholder={"Description"}
                 onChange={(e) => setProject({ ...project, description: e.target.value })}
                 value={project.description}
+                required
               />
               <br />
               <button className="btn">Save</button>

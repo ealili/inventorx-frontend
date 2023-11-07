@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/user/user.action.js";
-import { BiArrowBack } from "react-icons/bi";
+import FormInput from "../../components/form-input/FormInput.jsx";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -14,9 +14,6 @@ export default function Signup() {
   const passwordRef = useRef(null);
   const passwordConfirmRef = useRef(null);
   const teamNameRef = useRef(null);
-
-  const [step, setStep] = useState(1);
-
   const [errors, setErrors] = useState(null);
 
   const onSubmit = (e) => {
@@ -62,22 +59,24 @@ export default function Signup() {
               ))}
             </div>
           )}
-
-          <div className={step === 1 ? "fade-in" : "fade-out"}>
-            <input ref={teamNameRef} type="text" placeholder={"Team Name"} />
-            <input ref={nameRef} type="text" placeholder={"Full Name"} required />
-            <input ref={emailRef} type="email" placeholder={"Email Address"} required />
-            <input ref={passwordRef} type="password" placeholder={"Password"} required />
-            <input
-              ref={passwordConfirmRef}
-              type="password"
-              placeholder={"Password confirmation"}
-              required
-            />
-            <button className="btn btn-block" type="submit">
-              Sign Up
-            </button>
-          </div>
+          <label className="form-label">Team Name</label>
+          <input ref={teamNameRef} type="text" placeholder="Team Name" required />
+          <label className="form-label">Full Name</label>
+          <input ref={nameRef} type="text" placeholder="Full Name" required />
+          <label className="form-label">Email Address</label>
+          <input ref={emailRef} type="email" placeholder="Email Address" required />
+          <label className="form-label">Password</label>
+          <input ref={passwordRef} type="password" placeholder="Password" required />
+          <label className="form-label">Password Confirmation</label>
+          <input
+            ref={passwordConfirmRef}
+            type="password"
+            placeholder="Password confirmation"
+            required
+          />
+          <button className="btn btn-block" type="submit">
+            Sign Up
+          </button>
         </form>
 
         <p className="message">

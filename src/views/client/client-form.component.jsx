@@ -80,19 +80,22 @@ export default function ClientForm() {
         )}
         {!loading && (
           <form onSubmit={onSubmit}>
-            <FormInput
-              label={"Company Name"}
+            <label className="form-label">Company Name</label>
+            <input
+              placeholder={"Company Name"}
               onChange={(e) => setClient({ ...client, company_name: e.target.value })}
               value={client.company_name}
             />
-            <FormInput
-              label={"Address"}
+            <label className="form-label">Address</label>
+            <input
+              placeholder={"Address"}
               onChange={(e) => setClient({ ...client, address: e.target.value })}
               value={client.address}
               type={"text"}
             />
-            <FormInput
-              label={"Website"}
+            <label className="form-label">Website</label>
+            <input
+              placeholder={"Website"}
               onChange={(e) => setClient({ ...client, website: e.target.value })}
               value={client.website}
               type={"text"}
