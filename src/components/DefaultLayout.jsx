@@ -42,6 +42,10 @@ export default function DefaultLayout() {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const closeDrawer = () => {
+    setMobileOpen(false);
+  };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -71,19 +75,19 @@ export default function DefaultLayout() {
       <Divider />
       <List>
         <aside>
-          <NavLink to={"/dashboard"}>
+          <NavLink to={"/dashboard"} onClick={closeDrawer}>
             <RxDashboard style={{ fontSize: "22px", margin: "0 10px" }} />
             Dashboard
           </NavLink>
-          <NavLink to={"/users"}>
+          <NavLink to={"/users"} onClick={closeDrawer}>
             <FiUsers style={{ fontSize: "22px", margin: "0 10px" }} />
             Users
           </NavLink>
-          <NavLink to={"/clients"}>
+          <NavLink to={"/clients"} onClick={closeDrawer}>
             <TbUsersGroup style={{ fontSize: "22px", margin: "0 10px" }} />
             Clients
           </NavLink>
-          <NavLink to={"/projects"}>
+          <NavLink to={"/projects"} onClick={closeDrawer}>
             <AiOutlineFundProjectionScreen style={{ fontSize: "22px", margin: "0 10px" }} />
             Projects
           </NavLink>

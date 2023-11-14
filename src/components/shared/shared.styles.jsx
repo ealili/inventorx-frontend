@@ -31,3 +31,11 @@ export const FormContainer = styled.div`
 
   ${animationStyles}
 `;
+
+export const NoDataFoundYetContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  text-align: center;
+`;

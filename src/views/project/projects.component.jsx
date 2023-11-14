@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import Project from "./project.component.jsx";
 import { getProjects } from "../../services/ProjectService.js";
-import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
+import {
+  NoDataFoundYetContainer,
+  PageHeaderContainer,
+} from "../../components/shared/shared.styles.jsx";
+import NoRecordsMessage from "../../components/no-records-message/no-records-message.component.jsx";
 
 export default function Projects() {
   const { setNotification } = useStateConetxt();
@@ -54,36 +58,39 @@ export default function Projects() {
         </Link>
       </PageHeaderContainer>
 
-      <div className={"card animated fadeInDown"}>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Created at</th>
-              <th>Deadline</th>
-              <th>Edit</th>
-              <th style={{ textAlign: "right" }}>Delete</th>
-            </tr>
-          </thead>
-          {loading && (
-            <tbody>
+      {!loading && projects.length > 0 && (
+        <div className={"card animated fadeInDown"}>
+          <table>
+            <thead>
               <tr>
-                <td colSpan={"5"} className={"text-center"}>
-                  Loading...
-                </td>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Deadline</th>
+                <th>Edit</th>
+                <th style={{ textAlign: "right" }}>Delete</th>
               </tr>
-            </tbody>
-          )}
-          {!loading && (
-            <tbody>
-              {projects.map((project) => (
-                <Project key={project.id} project={project} onDelete={onDelete} />
-              ))}
-            </tbody>
-          )}
-        </table>
-      </div>
+            </thead>
+            {loading && (
+              <tbody>
+                <tr>
+                  <td colSpan={"5"} className={"text-center"}>
+                    Loading...
+                  </td>
+                </tr>
+              </tbody>
+            )}
+            {!loading && (
+              <tbody>
+                {projects.map((project) => (
+                  <Project key={project.id} project={project} onDelete={onDelete} />
+                ))}
+              </tbody>
+            )}
+          </table>
+        </div>
+      )}
+      {!loading && projects.length < 1 && <NoRecordsMessage type={"projects"} />}
     </div>
   );
 }
