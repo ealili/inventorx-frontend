@@ -6,6 +6,7 @@ import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 import { useDispatch } from "react-redux";
 import { setNotification } from "../../store/notification/notification.action.js";
 import User from "./user.component.jsx";
+import NoRecordsMessage from "../../components/no-records-message/no-records-message.component.jsx";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -83,6 +84,8 @@ export default function Users() {
           )}
         </table>
       </div>
+
+      {!loading && users.length < 1 && <NoRecordsMessage type={"users"} />}
     </div>
   );
 }
