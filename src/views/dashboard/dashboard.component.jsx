@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [insights, setInsights] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchInsights();
   }, []);
 
