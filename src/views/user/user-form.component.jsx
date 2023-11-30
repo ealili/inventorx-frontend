@@ -96,18 +96,23 @@ export default function UserForm() {
               value={user.email}
               type={"email"}
             />
-            <FormInput
-              label={"Password"}
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
-              value={user.password}
-              type={"password"}
-            />
-            <FormInput
-              label={"Password Confirmation"}
-              onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
-              value={user.password_confirmation}
-              type={"password"}
-            />
+            {!id && (
+              <>
+                <FormInput
+                  label={"Password"}
+                  onChange={(e) => setUser({ ...user, password: e.target.value })}
+                  value={user.password}
+                  type={"password"}
+                />
+                <FormInput
+                  label={"Password Confirmation"}
+                  onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
+                  value={user.password_confirmation}
+                  type={"password"}
+                />
+              </>
+            )}
+
             <button className="btn">Save</button>
           </form>
         )}
