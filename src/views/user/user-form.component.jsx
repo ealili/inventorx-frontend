@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
 import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
-import FormInput from "../../components/form-input/FormInput.jsx";
+import FormInput from "../../components/form-input/form-input.component.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
 import { FormContainer } from "../../components/shared/shared.styles.jsx";
 
