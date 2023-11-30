@@ -91,6 +91,10 @@ export default function DefaultLayout() {
             <AiOutlineFundProjectionScreen style={{ fontSize: "22px", margin: "0 10px" }} />
             Projects
           </NavLink>
+          <NavLink to={`/profile/${user.id}`} onClick={closeDrawer}>
+            <FiUser style={{ fontSize: "22px", margin: "0 10px" }} />
+            Profile
+          </NavLink>
         </aside>
       </List>
       <Divider />
@@ -155,13 +159,14 @@ export default function DefaultLayout() {
         >
           {drawer}
         </Drawer>
+        {/* Drawer for desktop screens, does not open by default */}
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
           }}
-          open
+          open={mobileOpen} // This will now be controlled by the same state as the mobile drawer
         >
           {drawer}
         </Drawer>
