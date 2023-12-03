@@ -11,6 +11,7 @@ const middleWares = [logger, thunk];
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

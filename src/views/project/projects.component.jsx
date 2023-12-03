@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client.js";
 import { Link } from "react-router-dom";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import Project from "./project.component.jsx";
 import { getProjects } from "../../services/ProjectService.js";
-import {
-  NoDataFoundYetContainer,
-  PageHeaderContainer,
-} from "../../components/shared/shared.styles.jsx";
+import { PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
 import NoRecordsMessage from "../../components/no-records-message/no-records-message.component.jsx";
+import { useDispatch } from "react-redux";
+import { setNotification } from "../../store/notification/notification.action.js";
 
 export default function Projects() {
-  const { setNotification } = useStateConetxt();
+  const dispatch = useDispatch;
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +37,7 @@ export default function Projects() {
     console.log(project.id);
 
     axiosClient.delete(`/projects/${project.id}`).then(() => {
-      setNotification("Project was deleted successfully");
+      dispatch(setNotification("Project was deleted successfully"));
       // Update Projects, fetch again
       fetchProjects();
     });

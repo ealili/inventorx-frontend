@@ -1,12 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import FormInput from "../../components/form-input/form-input.component.jsx";
 import PageHeader from "../../components/page-header/page-header.component.jsx";
 import { FormContainer } from "../../components/shared/shared.styles.jsx";
+import { useDispatch } from "react-redux";
+import { setNotification } from "../../store/notification/notification.action.js";
 
 export default function UserForm() {
+  const dispatch = useDispatch;
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
@@ -18,8 +20,6 @@ export default function UserForm() {
     password: "",
     password_confirmation: "",
   });
-
-  const { setNotification } = useStateConetxt();
 
   useEffect(() => {
     console.log(id);
@@ -45,7 +45,7 @@ export default function UserForm() {
       axiosClient
         .put(`users/${user.id}`, user)
         .then(() => {
-          setNotification("User updated successfully");
+          dispatch(setNotification("User updated successfully"));
           navigate("/users");
         })
         .catch((err) => {
@@ -58,7 +58,7 @@ export default function UserForm() {
       axiosClient
         .post("/users", user)
         .then(() => {
-          setNotification("User created successfully");
+          dispatch(setNotification("User created successfully"));
           navigate("/users");
         })
         .catch((err) => {
