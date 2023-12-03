@@ -1,10 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../axios-client.js";
 import { useEffect, useState } from "react";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
 import { FormContainer, PageHeaderContainer } from "../../components/shared/shared.styles.jsx";
+import { useDispatch } from "react-redux";
+import { setNotification } from "../../store/notification/notification.action.js";
 
 export default function Profile() {
+  const dispatch = useDispatch;
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,6 @@ export default function Profile() {
 
   const [displayPassForm, setDisplayPassForm] = useState("none");
   const [displayBtn, setDisplayBtn] = useState("");
-  const { setNotification } = useStateConetxt();
 
   useEffect(() => {
     if (id) {
@@ -47,7 +48,7 @@ export default function Profile() {
       axiosClient
         .put(`users/${user.id}`, user)
         .then(() => {
-          setNotification("User updated successfully");
+          dispatch(setNotification("User updated successfully"));
           navigate("/users");
         })
         .catch((err) => {
@@ -60,7 +61,7 @@ export default function Profile() {
       axiosClient
         .post("/users", user)
         .then(() => {
-          setNotification("User created successfully");
+          dispatch(setNotification("User created successfully"));
           navigate("/users");
         })
         .catch((err) => {

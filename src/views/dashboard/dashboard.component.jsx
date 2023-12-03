@@ -14,7 +14,6 @@ const Dashboard = () => {
   const fetchInsights = async () => {
     const response = await axiosClient.get("insights");
     const insights = await response.data;
-    console.log(insights);
     setInsights(insights);
   };
 

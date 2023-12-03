@@ -1,16 +1,16 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { useStateConetxt } from "../../contexts/ContextProvider.jsx";
+import { useDispatch } from "react-redux";
+import { setNotification } from "../../store/notification/notification.action";
 
 export default function ResetPassword() {
+  const dispatch = useDispatch;
   const { token, email } = useParams();
 
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [errors, setErrors] = useState(null);
-
-  const { setNotification } = useStateConetxt();
 
   const navigate = useNavigate();
   const onSubmit = (e) => {
@@ -28,7 +28,7 @@ export default function ResetPassword() {
     axios
       .post("http://localhost:8000/api/password/reset", payload)
       .then(({ data }) => {
-        setNotification("Password reset successfully");
+        dispatch(setNotification("Password reset successfully"));
         navigate("/login");
       })
       .catch((err) => {

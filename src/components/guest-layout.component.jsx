@@ -1,12 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useStateConetxt } from "../contexts/ContextProvider.jsx";
+import { selectToken } from "../store/user/user.selector.js";
+import { useSelector } from "react-redux";
+import { selectNotification } from "../store/notification/notification.selector.js";
 
 export default function GuestLayout() {
-  const { token, notification } = useStateConetxt();
+  const token = useSelector(selectToken);
+  const notification = useSelector(selectNotification);
 
   if (token) {
-    return <Navigate to={"/users"} />;
+    return <Navigate to={"/"} />;
   }
+
   return (
     <>
       <Outlet />

@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/user/user.action.js";
 import axios from "axios";
-import { selectCurrentUser } from "../../store/user/user.selector.js";
+import { selectCurrentUser, selectToken } from "../../store/user/user.selector.js";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
+  const token = useSelector(selectToken);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -16,10 +17,11 @@ export default function Login() {
   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
-    if (currentUser) {
+    console.log(token);
+    if (token) {
       navigate("/users");
     }
-  }, []);
+  }, [token]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
