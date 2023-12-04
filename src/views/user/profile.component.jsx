@@ -25,6 +25,8 @@ export default function Profile() {
   const [displayPassForm, setDisplayPassForm] = useState("none");
   const [displayBtn, setDisplayBtn] = useState("");
 
+  const [updateProfilePicture, setUpdateProfilePicture] = useState(false);
+
   useEffect(() => {
     if (id) {
       setLoading(true);
@@ -105,6 +107,26 @@ export default function Profile() {
     }
   };
 
+  const handleProfilePictureChange = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    axiosClient
+      .post(`avatar`, formData)
+      .then(({ data }) => {
+        console.log("Profile picture updated");
+        // Update the user state with the new avatar URL
+        setUser({ ...user, avatar: data.avatar });
+        setUpdateProfilePicture(false);
+        dispatch(setNotification("Profile picture updated successfully"));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const handleClick = (e) => {
     setErrors(null);
     setDisplayPassForm("block");
@@ -133,13 +155,33 @@ export default function Profile() {
             ))}
           </div>
         )}
+
+        {/* TODO: Make profile picture component */}
+
+        <img src={user.avatar} width={120} height={"auto"} alt="" />
+        {updateProfilePicture && (
+          <input
+            type="file"
+            id="profile-picture"
+            name="avatar"
+            accept="image/*"
+            onChange={handleProfilePictureChange}
+          />
+        )}
+        <br />
+        {!updateProfilePicture && (
+          <button
+            style={{ width: "30%", padding: "5px", fontSize: "12px" }}
+            className="btn"
+            onClick={() => setUpdateProfilePicture(true)}
+          >
+            Update profile picture
+          </button>
+        )}
+        <hr />
+
         {!loading && (
           <form onSubmit={onSubmit}>
-            {/*TODO: Put avatar into a new image form*/}
-            {/*<img src={user.avatar} width={60} height={60} alt=""/><br/>*/}
-            {/*<button style={{backgroundColor: 'White', color: 'black', borderRadius: '10px'}}>Change</button>*/}
-            {/*<input type="file" id="img" name="img" accept="image/*" />*/}
-
             <div style={{ marginTop: "1%" }}></div>
             <input
               onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -153,7 +195,6 @@ export default function Profile() {
               type={"email"}
               disabled={true}
             />
-
             <button className="btn">Save</button>
           </form>
         )}
