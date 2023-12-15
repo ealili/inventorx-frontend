@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "./views/auth/Login.jsx";
 import Signup from "./views/auth/Signup.jsx";
 import Users from "./views/user/users.component.jsx";
-import NotFound from "./views/not-found.component.jsx";
+import NotFound from "./views/not-found/not-found.component.jsx";
 import DefaultLayout from "./components/default-layout.component.jsx";
 import GuestLayout from "./components/guest-layout.component.jsx";
 import UserForm from "./views/user/user-form.component.jsx";
