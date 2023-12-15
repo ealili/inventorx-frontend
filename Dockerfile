@@ -12,7 +12,9 @@ RUN yarn build
 
 FROM nginx:alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /var/www
+
+COPY docker/nginx/app.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

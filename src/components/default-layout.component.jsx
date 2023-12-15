@@ -1,18 +1,18 @@
-import { Navigate, Outlet } from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import axiosClient from "../axios-client.js";
-import { FiUser, FiUsers } from "react-icons/fi";
-import { TbUsersGroup } from "react-icons/tb";
-import { IoExitOutline } from "react-icons/io5";
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { RxDashboard } from "react-icons/rx";
-import { LogOutLink, NavLink, TeamLogo } from "./default-layout.styles.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser, selectToken } from "../store/user/user.selector.js";
-import { logoutUser } from "../store/user/user.action.js";
-import { selectNotification } from "../store/notification/notification.selector.js";
-import { useEffect, useState } from "react";
-import { setNotification } from "../store/notification/notification.action.js";
-import { Link } from "react-router-dom";
+import {FiUser, FiUsers} from "react-icons/fi";
+import {TbUsersGroup} from "react-icons/tb";
+import {IoExitOutline} from "react-icons/io5";
+import {AiOutlineFundProjectionScreen} from "react-icons/ai";
+import {RxDashboard} from "react-icons/rx";
+import {LogOutLink, NavLink, TeamLogo} from "./default-layout.styles.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {selectCurrentUser, selectToken} from "../store/user/user.selector.js";
+import {logoutUser} from "../store/user/user.action.js";
+import {selectNotification} from "../store/notification/notification.selector.js";
+import {useEffect, useState} from "react";
+import {setNotification} from "../store/notification/notification.action.js";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -28,7 +28,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Logout } from "@mui/icons-material";
+import {Logout} from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -53,7 +53,7 @@ export default function DefaultLayout() {
   if (!token) {
     console.log("Invalid token");
 
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/login"}/>;
   }
 
   const onLogout = (e) => {
@@ -66,46 +66,46 @@ export default function DefaultLayout() {
 
   const drawer = (
     <div>
-      <List style={{ backgroundColor: "#000b1a", color: "white" }}>
+      <List style={{backgroundColor: "#000b1a", color: "white"}}>
         <ListItem disablePadding>
           {/* Make it a button to go to profile */}
-          <ListItemText style={{ textAlign: "center", margin: "12px" }} primary={user.name} />
+          <ListItemText style={{textAlign: "center", margin: "12px"}} primary={user.name}/>
         </ListItem>
       </List>
-      <Divider />
+      <Divider/>
       <List>
         <aside>
           <NavLink to={"/dashboard"} onClick={closeDrawer}>
-            <RxDashboard style={{ fontSize: "22px", margin: "0 10px" }} />
+            <RxDashboard style={{fontSize: "22px", margin: "0 10px"}}/>
             Dashboard
           </NavLink>
           <NavLink to={"/users"} onClick={closeDrawer}>
-            <FiUsers style={{ fontSize: "22px", margin: "0 10px" }} />
+            <FiUsers style={{fontSize: "22px", margin: "0 10px"}}/>
             Users
           </NavLink>
           <NavLink to={"/clients"} onClick={closeDrawer}>
-            <TbUsersGroup style={{ fontSize: "22px", margin: "0 10px" }} />
+            <TbUsersGroup style={{fontSize: "22px", margin: "0 10px"}}/>
             Clients
           </NavLink>
           <NavLink to={"/projects"} onClick={closeDrawer}>
-            <AiOutlineFundProjectionScreen style={{ fontSize: "22px", margin: "0 10px" }} />
+            <AiOutlineFundProjectionScreen style={{fontSize: "22px", margin: "0 10px"}}/>
             Projects
           </NavLink>
           <NavLink to={`/profile/${user.id}`} onClick={closeDrawer}>
-            <FiUser style={{ fontSize: "22px", margin: "0 10px" }} />
+            <FiUser style={{fontSize: "22px", margin: "0 10px"}}/>
             Profile
           </NavLink>
         </aside>
       </List>
-      <Divider />
+      <Divider/>
       <List>
         <ListItem disablePadding>
           <LogOutLink href="#" onClick={onLogout}>
             <ListItemButton>
               <ListItemIcon>
-                <IoExitOutline style={{ fontSize: "24px" }} />
+                <IoExitOutline style={{fontSize: "24px"}}/>
               </ListItemIcon>
-              <ListItemText primary={"Log out"} />
+              <ListItemText primary={"Log out"}/>
             </ListItemButton>
           </LogOutLink>
         </ListItem>
@@ -114,15 +114,15 @@ export default function DefaultLayout() {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <Box sx={{display: "flex"}}>
+      <CssBaseline/>
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: {sm: `calc(100% - ${drawerWidth}px)`},
+          ml: {sm: `${drawerWidth}px`},
         }}
-        style={{ backgroundColor: "#000b1a", border: "none" }}
+        style={{backgroundColor: "#000b1a", border: "none"}}
       >
         <Toolbar>
           <IconButton
@@ -130,9 +130,9 @@ export default function DefaultLayout() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{mr: 2, display: {sm: "none"}}}
           >
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             {user.team?.name}
@@ -141,7 +141,7 @@ export default function DefaultLayout() {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -153,8 +153,8 @@ export default function DefaultLayout() {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+            display: {xs: "block", sm: "none"},
+            "& .MuiDrawer-paper": {boxSizing: "border-box", width: drawerWidth},
           }}
         >
           {drawer}
@@ -163,8 +163,8 @@ export default function DefaultLayout() {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+            display: {xs: "none", sm: "block"},
+            "& .MuiDrawer-paper": {boxSizing: "border-box", width: drawerWidth},
           }}
           open={mobileOpen} // This will now be controlled by the same state as the mobile drawer
         >
@@ -173,10 +173,10 @@ export default function DefaultLayout() {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
       >
-        <Toolbar />
-        <Outlet />
+        <Toolbar/>
+        <Outlet/>
       </Box>
     </Box>
   );
