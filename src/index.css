@@ -1,0 +1,309 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+#defaultLayout,
+#guestLayout {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #212121;
+  background-color: #f6f6f6;
+}
+
+input {
+  outline: 0;
+  background: #ffffff;
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-radius: 10px;
+}
+
+input:focus {
+  border-color: #000;
+}
+
+.btn,
+.btn-add,
+.btn-edit,
+.btn-delete,
+.btn-cancel {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #212121;
+  border: 1px solid white;
+  text-decoration: none;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 16px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-add,
+.btn-edit,
+.btn-delete,
+.btn-cancel {
+  padding: 0.5rem 0.75rem;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.btn-add {
+  background-color: #00a762;
+}
+
+.btn-delete {
+  background-color: #b72424;
+}
+
+.btn-logout {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  color: #212121;
+  transition: all 0.3s;
+  border-radius: 6px;
+}
+
+.btn-logout:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid black;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 0.75rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.alert {
+  padding: 1rem;
+  background-color: #ff4040;
+  color: white;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.notification {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  padding: 1rem 1.5rem;
+  /*background-color: #00a762;*/
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.login-form,
+.forgot-password-form
+{
+  height: 100vh;
+}
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-signup-form .form {
+  width: 95%;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 450px;
+  padding: 50px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.login-signup-form .title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-signup-form .form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 16px;
+  text-align: center;
+}
+
+.login-signup-form .form .message a {
+  color: #5b08a7;
+  text-decoration: none;
+}
+
+/* Login/RegisterComponent form */
+
+#defaultLayout {
+  display: flex;
+}
+
+#defaultLayout aside {
+  width: 200px;
+  background-color: #212121;
+  /*padding: 1rem*/
+}
+
+#defaultLayout aside > a:hover {
+  /*Link*/
+  /*background-color: rgba(0, 0, 0, 0.2);*/
+  background-color: white;
+  color: black;
+}
+
+#defaultLayout .content {
+  flex: 1;
+}
+
+#defaultLayout header {
+  height: 80px;
+  padding: 2rem 3rem;
+  background-color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#defaultLayout main {
+  padding: 2rem;
+}
+
+.animated {
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#greeting {
+  display: flex;
+  align-items: center;
+}
+
+.v-aligned-image {
+  vertical-align: middle;
+  margin-left: 10px; /* Adjust the space between text and image as needed */
+  border-radius: 50%; /* Makes the image round */
+}
+
+#cross-button:hover {
+  cursor: pointer;
+}
+
+/* Target the dropdown arrow button in the date picker */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+/* Style the date input field */
+input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Firefox specific styles for the dropdown arrow button */
+input[type="date"]::-moz-calendar-box {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Remove the default clear button in some browsers */
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Your existing CSS */
+
+.fade-in {
+  opacity: 1;
+  max-height: 1000px; /* Set to a sufficiently large value */
+  transition: opacity 0.5s ease, max-height 0.4s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.5s ease, max-height 0.4s ease;
+  overflow: hidden;
+}
+
+.form-label {
+  margin-left: 2px;
+}
+
+fieldset {
+  border: none !important;
+  padding: 0 !important;
+}

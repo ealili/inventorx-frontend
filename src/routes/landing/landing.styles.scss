@@ -1,0 +1,67 @@
+@media (max-width: 767px) {
+  .first-row-images {
+    position: relative;
+    //margin-top: 40%;
+    height: 50vh;
+  }
+
+  .first-section-heading,
+  .demo-section {
+    display: block;
+    max-height: 20vh;
+    margin-bottom: 30vh;
+  }
+
+  #second-row-first-image {
+    left: 15%
+  }
+
+  #second-row-second-image {
+    left: 40%
+  }
+}
+
+@media (min-width: 800px) {
+  #second-row-first-image {
+    left: 15%
+  }
+  #second-row-second-image {
+    left: 25%
+  }
+}
+
+@media (min-width: 2200px) {
+  #second-row-first-image {
+    left: 20%
+  }
+  #second-row-second-image {
+    left: 25%
+  }
+}
+
+.transition-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+
+  &.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-register-button {
+  background-color: #F5F5F5;
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 15px;
+  min-width: 40vh;
+}
+
+
+.team-register-button:hover {
+  background-color: white;
+  color: black;
+}
+
