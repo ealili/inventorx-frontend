@@ -13,6 +13,10 @@ export const login = async (payload: LoginPayload) => {
     return await requestWithoutToken('POST', 'login', payload)
 }
 
+export const logout = async () => {
+    return await request('POST', 'logout')
+}
+
 export const register = async (payload: RegisterPayload) => {
     return await requestWithoutToken('POST', 'register', payload)
 }

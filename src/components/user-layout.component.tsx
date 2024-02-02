@@ -1,5 +1,4 @@
 import {Outlet, Navigate} from "react-router-dom";
-import axiosClient from "../services/axios-client.ts";
 import {FiUser, FiUsers} from "react-icons/fi";
 import {TbUsersGroup} from "react-icons/tb";
 import {RxExit} from "react-icons/rx";
@@ -33,6 +32,7 @@ import {
 import {AppDispatch} from "../store/store.ts";
 import {useTranslation} from "react-i18next";
 import i18n from "../i18n.ts";
+import {logout} from "../services/AuthService.ts";
 
 
 const drawerWidth = 240;
@@ -45,6 +45,7 @@ export default function UserLayoutComponent() {
   const notification = useSelector(selectNotification);
   const notificationType = useSelector(selectNotificationType)
 
+  // TODO: Move to a separate file
   const lngs = {
     de: {
       nativeName: 'DE',
@@ -81,17 +82,16 @@ export default function UserLayoutComponent() {
   };
 
 
-  const onLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    axiosClient.post("logout")
-      .then(() => {
-      })
-      .catch((error) => {
-        if (error.response.status === 401) {
-          dispatch(logoutUser());
-        }
-      });
+    try {
+      await logout();
+      dispatch(logoutUser());
+    } catch (err)
+    {
+      console.error(err)
+    }
   };
 
   const AdminDrawer = (
