@@ -10,6 +10,7 @@ import {selectToken} from "../../store/user/user.selector.ts";
 import {GrDocumentPdf} from "react-icons/gr";
 import {useTranslation} from "react-i18next";
 import {UserWithWorkingHours} from "../../types/user.ts";
+import i18 from '../../i18n.ts'
 
 const WorkingHours = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -91,7 +92,7 @@ const WorkingHours = () => {
       <div className="d-flex justify-content-between align-items-center">
         <div>
           <h3>
-            {new Date().toLocaleString('default', {month: 'long'})} {new Date().getFullYear()}
+            {formatMonthName(new Date())} {new Date().getFullYear()}
           </h3>
         </div>
         <div className="text-right">
@@ -130,6 +131,14 @@ const WorkingHours = () => {
       </Table>
     </div>
   );
+}
+
+function formatMonthName(date: Date, locale: string = i18.language): string {
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'long',
+  };
+
+  return new Intl.DateTimeFormat(locale, options).format(date);
 }
 
 export default WorkingHours;
