@@ -6,7 +6,6 @@ import NoRecordsMessage from "./no-records-message.component.tsx";
 import {UserInterface} from "../../store/user/user.interface.ts";
 import LoadingSpinner from "../../components/loadingSpinner.component.tsx";
 import './users.styles.scss'
-import {PageHeaderContainer} from "./shared.styles.tsx";
 import {Table} from "react-bootstrap";
 import {getUsers} from "../../services/UserService.ts";
 import {useTranslation} from "react-i18next";
@@ -41,18 +40,15 @@ export default function Users() {
     <div>
       {loading ? (<LoadingSpinner/>) : (
         <div>
-          <PageHeaderContainer>
-            <h1>Users Table</h1>
-          </PageHeaderContainer>
           <div className={"card animated fadeInDown"}>
             <Table striped responsive>
               <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>{t('name')}</th>
+                <th>{t('emailAddress')}</th>
+                <th>{t('role')}</th>
+                <th>{t('edit')}</th>
+                <th>{t('delete')}</th>
               </tr>
               </thead>
               <tbody>

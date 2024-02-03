@@ -4,8 +4,7 @@ export interface UserInvitation {
     id: number,
     invitation_token: string,
     email: string,
-    room_number: string,
-    created_at: string
+    created_at: string,
     role: Role
 }
 

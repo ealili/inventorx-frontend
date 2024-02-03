@@ -119,7 +119,7 @@ const Dashboard = () => {
                 <hr/>
                 <br/>
                 <h3 className={'text-center'}>
-                  Check in for {formatDate(currentDate)}
+                  {t('checkIn')} {formatDate(currentDate)}
                 </h3>
                 <br/>
 
@@ -129,7 +129,7 @@ const Dashboard = () => {
                       <Row className={'justify-content-center align-items-center'}>
                         <Col lg={1}>
                           <Form.Label>
-                            Working Hours
+                            {t('workingHours')}
                           </Form.Label>
                         </Col>
                         <Col lg={3}>
@@ -139,7 +139,7 @@ const Dashboard = () => {
                       <br/>
                       <Row className={'justify-content-center'}>
                         <Col lg={6}>
-                          <button className={'btn btn-add w-25'} type={'submit'}>Enter</button>
+                          <button className={'btn btn-add w-25'} type={'submit'}>{t('enter')}</button>
                         </Col>
                       </Row>
                     </Form.Group>

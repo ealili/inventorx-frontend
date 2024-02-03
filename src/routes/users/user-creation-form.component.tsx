@@ -12,7 +12,6 @@ import {UserInvitation} from "../../types/invitation.ts";
 export default function UserCreationForm() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate()
-  const [roomNumber, setRoomNumber] = useState('')
   const [email, setEmail] = useState('')
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -31,7 +30,6 @@ export default function UserCreationForm() {
       try {
         const response = await getInvitation(token);
         // await fetchRoles()
-        setRoomNumber(response.room_number)
         setEmail(response.email)
         setInvitation(response)
       } catch (err) {
@@ -48,7 +46,6 @@ export default function UserCreationForm() {
 
     const payload: UserCreationPayload = {
       email,
-      room_number: roomNumber,
       name: nameRef.current?.value || '',
       password: passwordRef.current?.value || '',
       password_confirmation: passwordConfirmRef.current?.value || '',
@@ -98,7 +95,6 @@ export default function UserCreationForm() {
           <FormInput type={'text'} name={'Name'} label={'Name'} ref={nameRef} required/>
           <fieldset disabled={true}>
             <FormInput type={'text'} name={'Email'} label={'Email'} defaultValue={email} required disabled/>
-            <FormInput type={'text'} name={'Room Number'} label={'Room Number'} defaultValue={roomNumber} disabled/>
           </fieldset>
           {/*<FormInput type={'text'} name={'Role'} defaultValue={invitation?.role.name} required*/}
           {/*           disabled/>*/}

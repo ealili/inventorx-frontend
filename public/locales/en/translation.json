@@ -36,5 +36,17 @@
   "successfulCheckIn": "You've checked in successfully",
   "user" : "User",
   "employee": "Employee",
-  "totalWorkingHours": "Total Working Hours"
+  "totalWorkingHours": "Total Working Hours",
+  "checkIn": "Check in",
+  "enter": "Enter",
+  "name": "Name",
+  "role": "Role",
+  "edit": "Edit",
+  "delete": "Delete",
+  "team": "Team",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "newPasswordConfirmation": "New Password Confirmation",
+  "updatePassword": "Update Password",
+  "close": "Close"
 }

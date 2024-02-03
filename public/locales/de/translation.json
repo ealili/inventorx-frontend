@@ -35,5 +35,17 @@
   "downloadPDF": "PDF Herunterladen",
   "user" : "Benutzer",
   "employee": "Mitarbeiter",
-  "totalWorkingHours": "Arbeitsstunden insgesamt"
+  "totalWorkingHours": "Arbeitsstunden insgesamt",
+  "checkIn": "Einchecken",
+  "enter": "Eingeben",
+  "name": "Name",
+  "role": "Rolle",
+  "edit": "Bearbeiten",
+  "delete": "Löschen",
+  "team": "Team",
+  "currentPassword": "Aktuelles Passwort",
+  "newPassword": "Neues Passwort",
+  "newPasswordConfirmation": "Bestätigung des neuen Passworts",
+  "updatePassword": "Passwort aktualisieren",
+  "close": "Schließen"
 }

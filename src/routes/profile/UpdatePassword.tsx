@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import {Button} from "@mui/material";
 import {updatePasswordRequest} from "../../services/AuthService.ts";
+import {useTranslation} from "react-i18next";
 
 export default function UpdatePassword() {
+  const {t} = useTranslation()
   // const [displayPassForm, setDisplayPassForm] = useState("none");
   const [showForm, setShowForm] = useState(false);
 
@@ -31,7 +33,7 @@ export default function UpdatePassword() {
       <Button variant="contained"
               className={"btn-add"}
               onClick={() => setShowForm(true)}>
-        Update Password
+        {t('updatePassword')}
       </Button>
     );
   }
@@ -39,29 +41,32 @@ export default function UpdatePassword() {
   return (
     <form onSubmit={handleUpdatePassword}>
       <br/>
-      <h2>Change your password</h2>
+      <h2>{t('updatePassword')}</h2>
       <br/>
       <input
         onChange={(e) => setPasswordForm({...passwordForm, current_password: e.target.value})}
-        placeholder={"Current Password"}
+        placeholder={t('currentPassword')}
         type={"password"}
       />
       <input
         onChange={(e) => setPasswordForm({...passwordForm, new_password: e.target.value})}
-        placeholder={"New Password"}
+        placeholder={t('newPassword')}
         type={"password"}
       />
       <input
-        onChange={(e) => setPasswordForm({...passwordForm, new_password_confirmation: e.target.value})}
-        placeholder={"New Password Confirmation"}
+        onChange={(e) => setPasswordForm({
+          ...passwordForm,
+          new_password_confirmation: e.target.value
+        })}
+        placeholder={t('newPasswordConfirmation')}
         type={"password"}
       />
       <button type={"submit"} className="btn">
-        Update Password
+        {t('updatePassword')}
       </button>
       &nbsp;
       <button className="btn" type="submit" onClick={() => setShowForm(false)}>
-        Close
+        {t('close')}
       </button>
     </form>
 

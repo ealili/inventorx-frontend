@@ -19,7 +19,6 @@ export interface UserCreationPayload {
     invitation_token: string,
     name: string,
     email: string,
-    room_number: string,
     password: string,
     password_confirmation: string
 }
