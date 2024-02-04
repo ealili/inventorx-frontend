@@ -109,10 +109,11 @@ export const requestWithoutToken = async (method: string, url: string, params = 
             return response
         }
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            throw new Error(error.response?.data.message);
-        } else {
-            throw new Error('different error than axios');
-        }
+        throw error
+        // if (axios.isAxiosError(error)) {
+        //     throw new Error(error.response?.data.message);
+        // } else {
+        //     throw new Error('different error than axios');
+        // }
     }
 };

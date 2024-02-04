@@ -1,4 +1,4 @@
-import {ErrorResponse, Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {loginUser} from "../../../store/user/userSlice.ts";
@@ -8,6 +8,7 @@ import {register} from '../../../services/AuthService.ts';
 import {RegisterPayload} from '../../../types/auth.ts';
 import {useTranslation} from "react-i18next";
 import GuestNavbar from "../../../components/guest-navbar/guest-navbar.component.tsx";
+import {AxiosError} from "axios";
 
 export default function RegisterComponent() {
   const navigate = useNavigate();
@@ -42,17 +43,9 @@ export default function RegisterComponent() {
       dispatch(loginUser({user, access_token}));
 
       navigate("/dashboard");
-    } catch (err) {
-      const response = err as ErrorResponse;
-
-      if (response && (response.status === 422 || response.status === 400)) {
-        if (response.data.errors) {
-          setErrors(response.data.errors);
-        } else {
-          setErrors({
-            email: [response.data.message as string], // Assuming message is a string
-          });
-        }
+    } catch (err: AxiosError | unknown) {
+      if (err instanceof AxiosError && err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
       }
     }
   };
