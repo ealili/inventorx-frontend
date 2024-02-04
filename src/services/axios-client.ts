@@ -58,6 +58,8 @@ export const request = async (method: string, url: string, params = {}) => {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${accessToken}`,
+                    'Accept-Language': 'de',
+                        // You can add other headers as needed
                 },
             };
 

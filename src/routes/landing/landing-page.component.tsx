@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import {Col, Form, Row} from "react-bootstrap";
-import workingHours from '../../assets/arbeitszeiten-out.png'
-import imacDashboard from '../../assets/imac-out.png'
+import macbookWorkingHours from '../../assets/macbook-pro-working-hours-min.png'
+import imacDashboard from '../../assets/imac-working-hours-min.png'
 import './landing.styles.scss'
 import React, {useEffect, useState} from "react";
 import {sendContactDetails} from "../../services/ContactService.ts";
@@ -17,6 +17,8 @@ import {
 import {selectToken} from "../../store/user/user.selector.ts";
 import {useTranslation} from "react-i18next";
 import GuestNavbar from "../../components/guest-navbar/guest-navbar.component.tsx";
+import iphoneDashboard from '../../assets/iphone-dashboard.png'
+import iphoneWorkingHours from '../../assets/iphone-working-hours.png'
 
 
 // TODO: REFACTOR, CODE CLEANUP, STYLE DIVS WITH STYLED COMPONENTS
@@ -127,7 +129,7 @@ function LandingPage() {
                 }}
               />
               <img
-                src={workingHours}
+                src={macbookWorkingHours}
                 alt=""
                 className="img-fluid"
                 style={{
@@ -154,10 +156,10 @@ function LandingPage() {
               <br/>
               <h2 className={'text-center'}>{t('firstSectionHeading')}</h2>
               <br/><br/>
-              <h3 className={'text-center'}>Register your team now!</h3>
+              <h3 className={'text-center'}>{t('Register Your Team Now!')}</h3>
               <br/>
               <button className={'team-register-button'} onClick={() => navigate('register')}>
-                Register
+                {t('register')}
               </button>
             </div>
           </Col>
@@ -179,29 +181,29 @@ function LandingPage() {
             }}
                  className={'second-row-images'}
             >
-              {/*<img*/}
-              {/*  id={'second-row-first-image'}*/}
-              {/*  src={}*/}
-              {/*  alt=""*/}
-              {/*  style={{*/}
-              {/*    maxWidth: 'auto',*/}
-              {/*    height: '50%',*/}
-              {/*    position: 'absolute',*/}
-              {/*    left: '21%',*/}
-              {/*  }}*/}
-              {/*/>*/}
-              {/*<img*/}
-              {/*  id={'second-row-second-image'}*/}
-              {/*  src={}*/}
-              {/*  alt=""*/}
-              {/*  className="img-fluid"*/}
-              {/*  style={{*/}
-              {/*    maxWidth: 'auto',*/}
-              {/*    height: '50%',*/}
-              {/*    position: 'absolute',*/}
-              {/*    // left: '25%',*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <img
+                id={'second-row-first-image'}
+                src={iphoneDashboard}
+                alt=""
+                style={{
+                  maxWidth: 'auto',
+                  height: '50%',
+                  position: 'absolute',
+                  left: '21%',
+                }}
+              />
+              <img
+                id={'second-row-second-image'}
+                src={iphoneWorkingHours}
+                alt=""
+                className="img-fluid"
+                style={{
+                  maxWidth: 'auto',
+                  height: '50%',
+                  position: 'absolute',
+                  // left: '25%',
+                }}
+              />
             </div>
           </Col>
           <Col xs={12} md={4}>

@@ -5,7 +5,7 @@ import {loginUser} from "../../store/user/userSlice.ts";
 import {selectCurrentUser} from "../../store/user/user.selector.ts";
 import {login} from "../../services/AuthService.ts";
 import {ErrorType} from "../../types/error.ts";
-import axios from "axios";
+import {AxiosError} from "axios";
 import {AppDispatch} from "../../store/store.ts";
 import {useTranslation} from "react-i18next";
 import GuestNavbar from "../../components/guest-navbar/guest-navbar.component.tsx";
@@ -18,6 +18,7 @@ export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<ErrorType | null>();
+  const [errorMessage, setErrorMessage] = useState('');
 
   // // Use an effect to navigate once currentUser becomes available
   // useEffect(() => {
@@ -27,6 +28,8 @@ export default function Login() {
   // }, [currentUser, navigate]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setErrorMessage('')
+    setErrors(null)
     e.preventDefault();
 
     const emailValue = emailRef.current?.value || ''; // Default value if emailRef is undefined
@@ -39,6 +42,7 @@ export default function Login() {
 
     setErrors(null);
 
+    // TODO: Update error handling, create resuable functions to get error messages
     try {
       const response = await login(payload);
       const {user, access_token} = response;
@@ -46,14 +50,15 @@ export default function Login() {
       dispatch(loginUser({user, access_token}));
 
       navigate("/");
-    } catch (error) {
-      const errorMessage: string = axios.isAxiosError(error) ? error?.message : String(error);
-      // Handle the error here
-      console.error("Login error:", errorMessage);
-
-      setErrors({
-        email: [errorMessage],
-      });
+    } catch (err: AxiosError | unknown) {
+      if (err instanceof AxiosError && err.response?.data?.errors) {
+        console.log(err)
+        setErrors(err.response.data.errors);
+      } else {
+        if (err instanceof AxiosError && err.response?.data?.message) {
+          setErrorMessage(err.response.data.message)
+        }
+      }
     }
   };
 
@@ -68,6 +73,11 @@ export default function Login() {
         <div className="form">
           <form onSubmit={onSubmit}>
             <h1 className={"title"}>{t('loginHeading')}</h1>
+            {errorMessage && (
+              <div className={"alert"}>
+                <p>{errorMessage}</p>
+              </div>
+            )}
             {errors && (
               <div className={"alert"}>
                 {Object.keys(errors).map((key) => (
