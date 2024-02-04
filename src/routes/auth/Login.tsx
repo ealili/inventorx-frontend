@@ -51,11 +51,13 @@ export default function Login() {
 
       navigate("/");
     } catch (err: AxiosError | unknown) {
-      if (err instanceof AxiosError && err.response?.data?.errors) {
+      console.log('test')
+      if (err instanceof AxiosError && err.response?.data?.data?.errors) {
         console.log(err)
-        setErrors(err.response.data.errors);
+        setErrors(err.response.data.data.errors);
+        console.log(err.response.data.errors)
       } else {
-        if (err instanceof AxiosError && err.response?.data?.message) {
+        if (err instanceof AxiosError && err.response?.data.message) {
           setErrorMessage(err.response.data.message)
         }
       }
