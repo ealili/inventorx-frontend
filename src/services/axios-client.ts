@@ -95,6 +95,7 @@ export const requestWithoutToken = async (method: string, url: string, params = 
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Accept-Language': 'de',
         },
     };
 
