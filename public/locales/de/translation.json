@@ -47,5 +47,6 @@
   "newPassword": "Neues Passwort",
   "newPasswordConfirmation": "Bestätigung des neuen Passworts",
   "updatePassword": "Passwort aktualisieren",
-  "close": "Schließen"
+  "close": "Schließen",
+  "teamName": "Teamname"
 }

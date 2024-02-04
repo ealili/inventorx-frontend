@@ -16,6 +16,7 @@ export interface UserInterface {
 }
 
 export interface UserStateInterface {
+    onDeleteCallback: () => Promise<void>,
     user: UserInterface;
     access_token: string;
 }

@@ -53,7 +53,7 @@ export default function Users() {
               </thead>
               <tbody>
               {users.map((user: UserInterface) => (
-                <User key={user.id} user={user} access_token={''}/>
+                <User key={user.id} user={user} access_token={''} onDeleteCallback={fetchUsers} />
               ))}
               </tbody>
             </Table>

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import FormInput from "../../components/form-input/form-input.component.jsx";
 import {PageHeaderContainer} from "./shared.styles.tsx";
 import {getUser, updateUser} from "../../services/UserService.ts";
+import LoadingSpinner from "../../components/loadingSpinner.component.tsx";
 
 export default function UserForm() {
   const navigate = useNavigate();
@@ -49,6 +50,12 @@ export default function UserForm() {
       navigate("/users");
     }
   };
+
+  if (loading) {
+    return (
+      <LoadingSpinner/>
+    )
+  }
 
   return (
     <>

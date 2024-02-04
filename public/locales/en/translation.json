@@ -48,5 +48,6 @@
   "newPassword": "New Password",
   "newPasswordConfirmation": "New Password Confirmation",
   "updatePassword": "Update Password",
-  "close": "Close"
+  "close": "Close",
+  "teamName": "Team Name"
 }

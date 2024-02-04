@@ -72,6 +72,9 @@ export default function RegisterComponent() {
                 ))}
               </div>
             )}
+            <label className="form-label">{t('teamName')}</label>
+            <input ref={teamNameRef} type="text" placeholder={t('teamName')}
+                   required/>
             <label className="form-label">{t('fullName')}</label>
             <input ref={nameRef} type="text" placeholder={t('fullName')} required/>
             <label className="form-label">{t('emailAddress')}</label>
@@ -85,9 +88,6 @@ export default function RegisterComponent() {
               placeholder={t('passwordConfirmation')}
               required
             />
-            <label className="form-label">{t('teamName')}</label>
-            <input ref={teamNameRef} type="text" placeholder={t('teamName')}
-                   required/>
             <button className="btn btn-block" type="submit">
               {t('register')}
             </button>
