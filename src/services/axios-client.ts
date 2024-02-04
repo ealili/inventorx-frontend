@@ -58,6 +58,7 @@ export const request = async (method: string, url: string, params = {}) => {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${accessToken}`,
+                    // TODO: Update to actual locale that the user has chosen
                     'Accept-Language': 'de',
                         // You can add other headers as needed
                 },
@@ -95,6 +96,7 @@ export const requestWithoutToken = async (method: string, url: string, params = 
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            // TODO: Update to actual locale that the user has chosen
             'Accept-Language': 'de',
         },
     };
