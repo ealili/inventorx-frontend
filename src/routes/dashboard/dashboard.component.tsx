@@ -139,7 +139,7 @@ const Dashboard = () => {
                       <br/>
                       <Row className={'justify-content-center'}>
                         <Col lg={6}>
-                          <button className={'btn btn-add w-25'} type={'submit'}>{t('enter')}</button>
+                          <button className={'btn btn-add w-50'} type={'submit'}>{t('enter')}</button>
                         </Col>
                       </Row>
                     </Form.Group>

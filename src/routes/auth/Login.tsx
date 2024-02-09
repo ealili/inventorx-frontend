@@ -51,9 +51,7 @@ export default function Login() {
 
       navigate("/");
     } catch (err: AxiosError | unknown) {
-      console.log('test')
       if (err instanceof AxiosError && err.response?.data?.data?.errors) {
-        console.log(err)
         setErrors(err.response.data.data.errors);
         console.log(err.response.data.errors)
       } else {
