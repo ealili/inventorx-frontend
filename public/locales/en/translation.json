@@ -49,5 +49,9 @@
   "newPasswordConfirmation": "New Password Confirmation",
   "updatePassword": "Update Password",
   "close": "Close",
-  "teamName": "Team Name"
+  "teamName": "Team Name",
+  "Register Your Team Now!":  "Register Your Team Now!",
+  "My Working Hours": "My Working Hours",
+  "Date": "Date",
+  "Hours": "Hours"
 }

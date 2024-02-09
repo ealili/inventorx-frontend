@@ -19,3 +19,8 @@ export const generatePDF = async () => {
 export const storeWorkingHours = async (payload: WorkingHoursPayload) => {
     return await request('POST', `working-hours`, payload)
 }
+
+
+export const getEmployeeWorkingHoursByMonth = async (userId: number, date: string) => {
+    return await request('GET', `working-hours/user/${userId}?date=${date}`)
+}

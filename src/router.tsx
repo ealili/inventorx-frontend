@@ -15,67 +15,78 @@ import UserInvitationForm from "./routes/invitations/user-invitation-form.compon
 import UserForm from "./routes/users/user-form.component.tsx";
 import LandingPage from "./routes/landing/landing-page.component.tsx";
 import WorkingHours from "./routes/working-hours/working-hours.component.tsx";
+import MyWorkingHours from "./routes/my-working-hours/my-working-hours.component.tsx";
+import TeamLayout from "./components/team-layout/team-layout.component.tsx";
+import Forbidden from "./routes/forbidden/forbidden.component.tsx";
 
-const root = localStorage.getItem("persist:root");
-let currentUserRole = "Guest";
-
-if (root) {
-  const currentUser = JSON.parse(root)?.user;
-  console.log("Current User:", currentUser);
-  if (currentUser) {
-    currentUserRole = currentUser?.role?.name;
-  }
-}
-
-const userRoutes = [
-  {
-    path: "/",
-    element: <Navigate to={"/dashboard"}/>,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },
-  {
-    path: "/profile",
-    element: <Profile/>,
-  },
-];
-
-const adminRoutes = [
-  {
-    path: "/",
-    element: <Navigate to={"/dashboard"}/>,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },
-  {
-    path: "/users",
-    element: <Users/>,
-  },
-  {
-    path: "/users/:id",
-    element: <UserForm key={"userUpdate"}/>,
-  },
-  {
-    path: "/invitations",
-    element: <UserInvitations key={'user-invitations'}/>,
-  },
-  {
-    path: "/invite",
-    element: <UserInvitationForm key={'user-invitation'}/>,
-  },
-  {
-    path: "/working-hours",
-    element: <WorkingHours/>,
-  },
-  {
-    path: "/profile",
-    element: <Profile/>,
-  },
-];
+// const root = localStorage.getItem("persist:root");
+// let currentUserRole = "Guest";
+//
+// if (root) {
+//   const currentUser = JSON.parse(root)?.user;
+//   console.log("Current User:", currentUser);
+//   if (currentUser) {
+//     currentUserRole = currentUser?.role?.name;
+//   }
+// }
+//
+// const userRoutes = [
+//   {
+//     path: "/",
+//     element: <Navigate to={"/dashboard"}/>,
+//   },
+//   {
+//     path: "/dashboard",
+//     element: <Dashboard/>,
+//   },
+//   {
+//     path: "/profile",
+//     element: <Profile/>,
+//   },
+//   {
+//     path: "/my-working-hours",
+//     element: <MyWorkingHours/>,
+//   },
+// ];
+//
+// const adminRoutes = [
+//   {
+//     path: "/",
+//     element: <Navigate to={"/dashboard"}/>,
+//   },
+//   {
+//     path: "/dashboard",
+//     element: <Dashboard/>,
+//   },
+//   {
+//     path: "/users",
+//     element: <Users/>,
+//   },
+//   {
+//     path: "/users/:id",
+//     element: <UserForm key={"userUpdate"}/>,
+//   },
+//   {
+//     path: "/invitations",
+//     element: <UserInvitations key={'user-invitations'}/>,
+//   },
+//   {
+//     path: "/invite",
+//     element: <UserInvitationForm key={'user-invitation'}/>,
+//   },
+//   {
+//     path: "/working-hours",
+//     element: <WorkingHours/>,
+//   },
+//   {
+//     path: "/profile",
+//     element: <Profile/>,
+//   },
+//   {
+//     path: "/my-working-hours",
+//     element: <MyWorkingHours/>,
+//   }
+// ];
 
 const router = createBrowserRouter([
   {
@@ -85,10 +96,54 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <UserLayoutComponent/>,
-    children:
-      currentUserRole == "User"
-        ? userRoutes.map((route) => ({...route, caseSensitive: false}))
-        : adminRoutes.map((route) => ({...route, caseSensitive: false})),
+    children: [
+      {
+        path: "/",
+        element: <Navigate to={"/dashboard"}/>,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard/>,
+      },
+      {
+        path: '/team',
+        element: <TeamLayout />,
+        children: [
+          {
+            path: "users",
+            element: <Users/>,
+          },
+          {
+            path: "users/:id",
+            element: <UserForm key={"userUpdate"}/>,
+          },
+          {
+            path: "invitations",
+            element: <UserInvitations key={'user-invitations'}/>,
+          },
+          {
+            path: "invite",
+            element: <UserInvitationForm key={'user-invitation'}/>,
+          },
+          {
+            path: "working-hours",
+            element: <WorkingHours/>,
+          }
+        ]
+      },
+      {
+        path: "/my-working-hours",
+        element: <MyWorkingHours/>,
+      },
+      {
+        path: "/forbidden",
+        element: <Forbidden/>,
+      },
+      {
+        path: "profile",
+        element: <Profile/>,
+      },
+    ]
   },
   {
     path: "/",
@@ -127,3 +182,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+

@@ -113,15 +113,15 @@ export default function UserLayoutComponent() {
             <RxDashboard style={{fontSize: "22px", margin: "0 10px"}}/>
             {t('dashboard')}
           </NavLink>
-          <NavLink to={"/users"} onClick={() => closeDrawer()}>
+          <NavLink to={"/team/users"} onClick={() => closeDrawer()}>
             <FiUsers style={{fontSize: "22px", margin: "0 10px"}}/>
             {t('usersLink')}
           </NavLink>
-          <NavLink to={`/working-hours/`} onClick={() => closeDrawer()}>
+          <NavLink to={`/team/working-hours/`} onClick={() => closeDrawer()}>
             <TbClockHour5 style={{fontSize: "22px", margin: "0 10px"}}/>
             {t('workingHours')}
           </NavLink>
-          <NavLink to={`/invitations/`} onClick={() => closeDrawer()}>
+          <NavLink to={`/team/invitations/`} onClick={() => closeDrawer()}>
             <TbUsersGroup style={{fontSize: "22px", margin: "0 10px"}}/>
             {t('invitationsLink')}
           </NavLink>
@@ -166,6 +166,10 @@ export default function UserLayoutComponent() {
           <NavLink to={"/dashboard"} onClick={() => closeDrawer()}>
             <RxDashboard style={{fontSize: "22px", margin: "0 10px"}}/>
             {t('dashboard')}
+          </NavLink>
+          <NavLink to={`/my-working-hours`} onClick={() => closeDrawer()}>
+            <TbClockHour5 style={{fontSize: "22px", margin: "0 10px"}}/>
+            {t('My Working Hours')}
           </NavLink>
           <NavLink to={`/profile/`} onClick={() => closeDrawer()}>
             <FiUser style={{fontSize: "22px", margin: "0 10px"}}/>
