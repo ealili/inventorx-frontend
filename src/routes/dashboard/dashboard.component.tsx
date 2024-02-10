@@ -38,6 +38,7 @@ const Dashboard = () => {
   }, [currentDate])
 
   const fetchEmployeeWorkingHour = async () => {
+    setLoading(true)
     try {
       const workingHour = await getEmployeeWorkingHour(currentUser.id, formatDateDashed(currentDate));
       setWorkingHour(workingHour);
@@ -46,7 +47,6 @@ const Dashboard = () => {
       setWorkingHour(null)
     }
     setLoading(false)
-
   }
 
   const updateDate = (increment: number) => {
