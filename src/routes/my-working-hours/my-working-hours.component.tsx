@@ -105,7 +105,7 @@ const MyWorkingHours = () => {
       <div>
         <div className={'d-flex justify-content-between align-items-center'}>
           <h3>
-            {formatMonthName(new Date())} {new Date().getFullYear()}
+            {formatMonthName(selectedDate)}
           </h3>
           <div>
             <DatePicker
@@ -153,6 +153,7 @@ const MyWorkingHours = () => {
 
 function formatMonthName(date: Date, locale: string = i18.language): string {
   const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
     month: 'long',
   };
 

@@ -238,7 +238,7 @@ export default function UserLayoutComponent() {
                     <img height={15} width={25} src={lngs[lng].flag} alt=""/>
                     {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                     {/*// @ts-expect-error*/}
-                    <span className="mx-1" style={{fontSize: '12px'}}>{lngs[lng].nativeName}</span>
+                    <span className="mx-1" style={{fontSize: '12px', color: 'black'}}>{lngs[lng].nativeName}</span>
                   </div>
                 </button>
               ))}

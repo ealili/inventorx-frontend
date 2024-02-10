@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
             {/*// @ts-expect-error*/}
             <img height={20} width={30} src={lngs[lng].flag} alt=""/>
             {/*// @ts-expect-error*/}
-            <span className="mx-1">{lngs[lng].nativeName}</span>
+            <span className="mx-1" style={{color: 'black'}}>{lngs[lng].nativeName}</span>
           </div>
         </button>
       ))}
