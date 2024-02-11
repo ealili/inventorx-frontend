@@ -13,6 +13,8 @@ import {IoIosCheckmarkCircle} from "react-icons/io";
 import {Col, Form, Row} from "react-bootstrap";
 import {WorkingHoursPayload} from "../../types/working-hours.ts";
 import {notify} from "../../store/notification/notificationSlice.ts";
+import {LineChart} from "@mui/x-charts";
+import Container from "react-bootstrap/Container";
 
 
 console.log(i18.language)
@@ -133,13 +135,16 @@ const Dashboard = () => {
                           </Form.Label>
                         </Col>
                         <Col lg={3}>
-                          <Form.Control type="number" value={workingHoursField.toString()} onChange={(e) => setWorkingHoursField(parseInt(e.target.value, 10))} placeholder="Working Hours"/>
+                          <Form.Control type="number" value={workingHoursField.toString()}
+                                        onChange={(e) => setWorkingHoursField(parseInt(e.target.value, 10))}
+                                        placeholder="Working Hours"/>
                         </Col>
                       </Row>
                       <br/>
                       <Row className={'justify-content-center'}>
                         <Col lg={6}>
-                          <button className={'btn btn-add w-50'} type={'submit'}>{t('enter')}</button>
+                          <button className={'btn btn-add w-50'}
+                                  type={'submit'}>{t('enter')}</button>
                         </Col>
                       </Row>
                     </Form.Group>
@@ -150,6 +155,24 @@ const Dashboard = () => {
             </>
           )
         }
+        <div className={'d-flex mt-5'}>
+          <div className="chart-container" style={{ width: "100%",
+            height: '100%'}}>
+            <LineChart
+              xAxis={[{ data: [1, 2, 3, 4, 5,6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30 ] }]}
+              series={[
+                {
+                  data: [9, 9.5, 10, 9, 10, 8.5, 9],
+                },
+              ]}
+              height={300}
+              // margin={{
+              //   top: 150,
+              // }}
+            />
+          </div>
+        </div>
+
 
         {/*{*/}
         {/*  selectedTimeslot && selectedMachine && <CenteredModal*/}
